@@ -8,261 +8,263 @@ import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 public class Cromosoma extends Individuo {
 	
 
-	private Esposo daniel;
-	private Esposo enrique;
-	private Esposo martin;
-	private Esposo pablo;
-
-	public enum Apellido{
-		Ortega, Lopez, Varela, Garcia
+	private ProfesorEspecialidad gramatica;
+	private ProfesorEspecialidad literatura;
+	private ProfesorEspecialidad etimologia;
+	private ProfesorEspecialidad ortografia;
+	private ProfesorEspecialidad redaccion;
+	
+	
+	public enum ColorAula{
+		Amarilla, Azul, Roja, Blanca, Verde
 	}
 	
-	public enum Deporte{
-		basquetbol, rugby, handbol, voleibol, natación, equitación, fútbol, tenis 
+	public enum UbicacionAula{
+		Primera, Segunda, Tercera, Cuarta, Quinta
 	}
 	
-	public enum Esposa{
-		Alicia, Natalia, Carolina, Florencia
+	public enum Peculiaridad{
+		Decano, Calvo, Pipa, Barbon, Gafas
 	}
 	
-	private void cargarPilaDeportes(Stack<Deporte> pilaDeportes){
-		while(Deporte.values().length != pilaDeportes.size()){
-			Deporte element=Deporte.values()[(int) (Math.random() * Deporte.values().length)];
-			if(!pilaDeportes.contains(element)){
-				pilaDeportes.push(element);
+	public enum Bebida{
+		Agua, Té, Leche, Café, Jugo
+	}
+	
+	public enum Pasatiempo{
+		Palíndromos, Epigrama, Crucigrama, Literati, Trivias
+	}
+	
+	private void cargarPilaColorAula(Stack<ColorAula> pilaColoresAula){
+		while(ColorAula.values().length != pilaColoresAula.size()){
+			ColorAula element=ColorAula.values()[(int) (Math.random() * ColorAula.values().length)];
+			if(!pilaColoresAula.contains(element)){
+				pilaColoresAula.push(element);
 			}
 		}
 	}
 	
-	private void cargarPilaApellidos(Stack<Apellido> pilaApellidos){
-		while(Apellido.values().length != pilaApellidos.size()){
-			Apellido element=Apellido.values()[(int) (Math.random() * Apellido.values().length)];
-			if(!pilaApellidos.contains(element)){
-				pilaApellidos.push(element);
+	private void cargarPilaUbicacionesAula(Stack<UbicacionAula> pilaUbicacionesAula){
+		while(UbicacionAula.values().length != pilaUbicacionesAula.size()){
+			UbicacionAula element=UbicacionAula.values()[(int) (Math.random() * UbicacionAula.values().length)];
+			if(!pilaUbicacionesAula.contains(element)){
+				pilaUbicacionesAula.push(element);
 			}
 		}
 	}
 	
-	private void cargarPilaEsposas(Stack<Esposa>pilaEsposas){
-		while(Esposa.values().length != pilaEsposas.size()){
-			Esposa element=Esposa.values()[(int) (Math.random() * Esposa.values().length)];
-			if(!pilaEsposas.contains(element)){
-				pilaEsposas.push(element);
+	private void cargarPilaPeculiaridades(Stack<Peculiaridad> pilaPeculiaridades){
+		while(Peculiaridad.values().length != pilaPeculiaridades.size()){
+			Peculiaridad element=Peculiaridad.values()[(int) (Math.random() * Peculiaridad.values().length)];
+			if(!pilaPeculiaridades.contains(element)){
+				pilaPeculiaridades.push(element);
 			}
 		}
 	}	
+	
+	private void cargarPilaBebidas(Stack<Bebida> pilaBebidas){
+		while(Bebida.values().length != pilaBebidas.size()){
+			Bebida element=Bebida.values()[(int) (Math.random() * Bebida.values().length)];
+			if(!pilaBebidas.contains(element)){
+				pilaBebidas.push(element);
+			}
+		}
+	}
+	
+	private void cargarPilaPasatiempos(Stack<Pasatiempo> pilaPasatiempos){
+		while(Pasatiempo.values().length != pilaPasatiempos.size()){
+			Pasatiempo element=Pasatiempo.values()[(int) (Math.random() * Pasatiempo.values().length)];
+			if(!pilaPasatiempos.contains(element)){
+				pilaPasatiempos.push(element);
+			}
+		}
+	}
 
 	
 	@Override
 	public double aptitud() {
 				
-		return this.aptitudDaniel() + this.aptitudEnrique() + this.aptitudPablo() + this.aptitudMartin();
+		return this.aptitudLiteratura() + this.aptitudOrtografia();
 	}
 	
 
 	public Cromosoma() {
 		
-		Stack<Deporte> pilaDeportes=new Stack<Cromosoma.Deporte>();
-		Stack<Apellido> pilaApellidos=new Stack<Cromosoma.Apellido>();
-		Stack<Esposa> pilaEsposas=new Stack<Cromosoma.Esposa>();		
+		Stack<ColorAula> pilaColoresAula= new Stack<Cromosoma.ColorAula>();
+		Stack<UbicacionAula> pilaUbicacionesAula=new Stack<Cromosoma.UbicacionAula>();
+		Stack<Peculiaridad> pilaPeculiaridades=new Stack<Cromosoma.Peculiaridad>();
+		Stack<Bebida> pilaBebidas=new Stack<Cromosoma.Bebida>();
+		Stack<Pasatiempo> pilaPasatiempos=new Stack<Cromosoma.Pasatiempo>();
 		
-		this.cargarPilaEsposas(pilaEsposas);
-		this.cargarPilaApellidos(pilaApellidos);
-		this.cargarPilaDeportes(pilaDeportes);
+		this.cargarPilaColorAula(pilaColoresAula);
+		this.cargarPilaUbicacionesAula(pilaUbicacionesAula);
+		this.cargarPilaPeculiaridades(pilaPeculiaridades);
+		this.cargarPilaBebidas(pilaBebidas);
+		this.cargarPilaPasatiempos(pilaPasatiempos);
 		
-		this.setDaniel(new Esposo(pilaApellidos.pop(),pilaDeportes.pop(),pilaEsposas.pop(),pilaDeportes.pop()));
-		this.setEnrique(new Esposo(pilaApellidos.pop(),pilaDeportes.pop(),pilaEsposas.pop(),pilaDeportes.pop()));
-		this.setMartin(new Esposo(pilaApellidos.pop(),pilaDeportes.pop(),pilaEsposas.pop(),pilaDeportes.pop()));
-		this.setPablo(new Esposo(pilaApellidos.pop(),pilaDeportes.pop(),pilaEsposas.pop(),pilaDeportes.pop()));
-		
+		this.setGramatica(new ProfesorEspecialidad(pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
+		this.setLiteratura(new ProfesorEspecialidad(pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
+		this.setEtimologia(new ProfesorEspecialidad(pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
+		this.setOrtografia(new ProfesorEspecialidad(pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
+		this.setRedaccion(new ProfesorEspecialidad(pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
 		//this.printCromosoma();
 	}
 	
 	public void printCromosoma(){
-		System.out.println("Daniel: "+this.daniel.printEsposo());
-		System.out.println("Enrique: "+this.enrique.printEsposo());
-		System.out.println("Martin: "+this.martin.printEsposo());
-		System.out.println("Pablo: "+this.pablo.printEsposo());
+		System.out.println("Gramatica: "+this.gramatica.printProfesorEspecialidad());
+		System.out.println("Literatura: "+this.literatura.printProfesorEspecialidad());
+		System.out.println("Etimología: "+this.etimologia.printProfesorEspecialidad());
+		System.out.println("Ortografía: "+this.ortografia.printProfesorEspecialidad());
+		System.out.println("Redacción: "+this.redaccion.printProfesorEspecialidad());
 		System.out.println("====================================");
 	}
 	
-	
-	private double aptitudDaniel(){
+	private double aptitudLiteratura(){
 		double value=0;
-		Esposo esposo = this.daniel;
-		//Daniel no se apellida Ortega.
-		if(!esposo.getApellido().equals(Apellido.Ortega)){
-			value+=1;
-		}else{
-			value-=5;
-		}				
-		//La joven que practica natación no conoce a Daniel.
-		if(!esposo.getDeporteMujer().equals(Deporte.natación)){
-			value+=1;
-		}else{
+		// El profesor que usa gafas imparte el curso de literatura.
+		ProfesorEspecialidad literatura = this.literatura;
+		if(literatura.getPeculiaridad().equals(Peculiaridad.Gafas)){
+			value+=10;
+		} else {
 			value-=5;
 		}
-		value+=this.aptitudGeneral(esposo);
+		value+=this.aptitudGeneral(literatura);
 		return value;
 	}
 	
-	private double aptitudEnrique(){
+	private double aptitudOrtografia(){
 		double value=0;
-		//Enrique se apellida López. 
-		Esposo esposo = this.enrique;
-		if(!esposo.getApellido().equals(Apellido.Lopez)){
-			value+=1;
-		}else{
+		// El profesor aficionado a los crucigramas imparte el curso de ortografía.
+		ProfesorEspecialidad ortografia = this.ortografia;
+		if(ortografia.getPasatiempo().equals(Pasatiempo.Crucigrama)){
+			value+=10;
+		} else {
 			value-=5;
 		}
-		value+=this.aptitudGeneral(esposo);
-		return value;
-	}	
-	
-	private double aptitudPablo(){
-		double value=0;
-		//El nombre de García es Pablo.
-		if(this.pablo.getApellido().equals(Apellido.Garcia)){
-			value+=1;
-		}else{
-			value-=5;
-		}		
-		value+=this.aptitudGeneral(this.pablo);		
-		return value;
-	}	
-	
-	private double aptitudMartin(){
-		double value=0;
-		//Martín, que no practica basquetbol, no conoce a Alicia.
-		if(!this.martin.getDeporteVaron().equals(Deporte.basquetbol)){
-			value+=1;
-		}else{
-			value-=5;
-		}
-		//Martin no conoce a Alicia
-		if(!this.martin.getEsposa().equals(Esposa.Alicia)){
-			value+=1;
-		}else{
-			value-=5;
-		}		
-		//Florencia no conoce a Martín  
-		if(!this.martin.getEsposa().equals(Esposa.Florencia)){
-			value+=1;
-		}else{
-			value-=5;
-		}			
-		value+=this.aptitudGeneral(this.martin);
+		value+=this.aptitudGeneral(ortografia);
 		return value;
 	}
 	
-	
-	private double aptitudGeneral(Esposo esposo){
+	private double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad){
 		double value=0;
-		//El marido de Natalia integra un equipo de rugby.
-		if(esposo.getEsposa().equals(Esposa.Natalia))
-			if (esposo.getDeporteVaron().equals(Deporte.rugby))
-				value++;
-			else
-				value-=3;
-				
-		//El que juega al handbol se apellida Varela.
-		if(esposo.getDeporteVaron().equals(Deporte.handbol))
-			if(esposo.getApellido().equals(Apellido.Varela))
-				value++;
-			else
-				value-=3;
-				
-		//La joven que juega al voleibol no es la pareja de López. 
-		if(esposo.getDeporteMujer().equals(Deporte.voleibol))
-			if(!esposo.getApellido().equals(Apellido.Lopez))
-				value++;
-			else
-				value-=3;
-						
-		//El esposo de Carolina no practica basquetbol ni handbol.
-		if(esposo.getEsposa().equals(Esposa.Carolina))
+		
+		//El profesor que fuma pipa imparte cátedra en el aula roja.
+		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Pipa)){
+			if(profesorEspecialidad.getColorAula().equals(ColorAula.Roja)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		//El profesor que es calvo toma té
+		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Calvo)){
+			if(profesorEspecialidad.getBebida().equals(Bebida.Té)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		//TODO El aula verde está a la derecha del aula blanca 
+		
+		//El profesor del aula verde toma café
+		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
+			if(profesorEspecialidad.getBebida().equals(Bebida.Café)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		//El profesor del aula amarilla es aficionado a los palíndromos.
+		if(profesorEspecialidad.getColorAula().equals(ColorAula.Amarilla)){
+			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palíndromos)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		// El que imparte clases en el aula del centro toma leche
+		if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Tercera)){
+			if(profesorEspecialidad.getBebida().equals(Bebida.Leche)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		//El decano de la universidad imparte su cátedra en la primera aula.
+		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)){
+			if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Primera)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		//TODO El profesor aficionado a los epigramas imparte su curso junto al profesor de redacción.
+		
+		//TODO El profesor de etimologías dicta su clase junto al aula del aficionado a los palíndromos.
+
+		// El profesor cuyo pasatiempo son las trivias bebe jugo.
+		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Trivias)){
+			if(profesorEspecialidad.getBebida().equals(Bebida.Jugo)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		// El profesor que es barbón es aficionado al literati (scrabble).
+		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Barbon)){
+			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Literati)){
+				value+=10;
+			} else {
+				value-=10;
+			}
+		}
+		
+		//TODO El decano imparte su cátedra junto al aula azul.
+		
+		//TODO El que es aficionado a los epigramas es vecino de aula del que toma agua
+		
 			
-			if(!esposo.getDeporteVaron().equals(Deporte.basquetbol) && 
-			   !esposo.getDeporteVaron().equals(Deporte.handbol))
-				value++;
-			else
-				value-=3;
-					
-		//La que practica equitación no se llama Florencia y no conoce a Varela. 
-		if(esposo.getDeporteMujer().equals(Deporte.equitación))
-			if(!esposo.getEsposa().equals(Esposa.Florencia) &&
-			   !esposo.getApellido().equals(Apellido.Varela))
-				value++;
-			else
-				value-=3;
-		
-		//El que integra un equipo de fútbol está en pareja con la joven que juega al tenis.
-		if(esposo.getDeporteVaron().equals(Deporte.fútbol))
-			if(esposo.getDeporteMujer().equals(Deporte.tenis))
-				value++;
-			else
-				value-=3;
-					
-		//Florencia no conoce a Varela. 
-		if(esposo.getEsposa().equals(Esposa.Florencia))
-			if(!esposo.getApellido().equals(Apellido.Varela))
-				value++;
-			else
-				value-=3;
-		
-		
-		//Ni López ni Ortega conocen a Natalia.
-		if(esposo.getEsposa().equals(Esposa.Natalia))
-			if(!esposo.getApellido().equals(Apellido.Lopez) &&
-			   !esposo.getApellido().equals(Apellido.Ortega))
-				value++;
-			else
-				value-=3;
-		
 		
 		return value;
 
 	}
 
-
-
-	public Esposo getDaniel() {
-		return daniel;
+	public ProfesorEspecialidad getGramatica() {
+		return gramatica;
 	}
-
-
-	public void setDaniel(Esposo daniel) {
-		this.daniel = daniel;
+	public void setGramatica(ProfesorEspecialidad gramatica) {
+		this.gramatica = gramatica;
 	}
-
-
-	public Esposo getEnrique() {
-		return enrique;
+	public ProfesorEspecialidad getLiteratura() {
+		return literatura;
 	}
-
-
-	public void setEnrique(Esposo enrique) {
-		this.enrique = enrique;
+	public void setLiteratura(ProfesorEspecialidad literatura) {
+		this.literatura = literatura;
 	}
-
-
-	public Esposo getMartin() {
-		return martin;
+	public ProfesorEspecialidad getEtimologia() {
+		return etimologia;
 	}
-
-
-	public void setMartin(Esposo martin) {
-		this.martin = martin;
+	public void setEtimologia(ProfesorEspecialidad etimologia) {
+		this.etimologia = etimologia;
 	}
-
-
-	public Esposo getPablo() {
-		return pablo;
+	public ProfesorEspecialidad getOrtografia() {
+		return ortografia;
 	}
-
-
-	public void setPablo(Esposo pablo) {
-		this.pablo = pablo;
+	public void setOrtografia(ProfesorEspecialidad ortografia) {
+		this.ortografia = ortografia;
+	}
+	public ProfesorEspecialidad getRedaccion() {
+		return redaccion;
+	}
+	public void setRedaccion(ProfesorEspecialidad redaccion) {
+		this.redaccion = redaccion;
 	}
 
 
@@ -290,41 +292,16 @@ public class Cromosoma extends Individuo {
 		StringBuffer buffer=new StringBuffer();
 		
 		buffer.append("\r\n");
-		buffer.append("Daniel: "+this.daniel.printEsposo()+"\r\n");
-		buffer.append("Enrique: "+this.enrique.printEsposo()+"\r\n");
-		buffer.append("Martin: "+this.martin.printEsposo()+"\r\n");
-		buffer.append("Pablo: "+this.pablo.printEsposo()+"\r\n");
+		buffer.append("Gramatica: "+this.gramatica.printProfesorEspecialidad()+"\r\n");
+		buffer.append("Literatura: "+this.literatura.printProfesorEspecialidad()+"\r\n");
+		buffer.append("Etimología: "+this.etimologia.printProfesorEspecialidad()+"\r\n");
+		buffer.append("Ortografía: "+this.ortografia.printProfesorEspecialidad()+"\r\n");
+		buffer.append("Redacción: "+this.redaccion.printProfesorEspecialidad()+"\r\n");
 		buffer.append("Aptitud: "+(new Double(aptitud())).toString()+"\r\n");
 		
 		return buffer.toString();
 		//return (new Double(aptitud())).toString();
 	}
 
-	/*
-	public Stack<Deporte> getPilaDeportes() {
-		return pilaDeportes;
-	}
-
-	public void setPilaDeportes(Stack<Deporte> pilaDeportes) {
-		this.pilaDeportes = pilaDeportes;
-	}
-
-	public Stack<Apellido> getPilaApellidos() {
-		return pilaApellidos;
-	}
-
-	public void setPilaApellidos(Stack<Apellido> pilaApellidos) {
-		this.pilaApellidos = pilaApellidos;
-	}
-
-	public Stack<Esposa> getPilaEsposas() {
-		return pilaEsposas;
-	}
-
-	public void setPilaEsposas(Stack<Esposa> pilaEsposas) {
-		this.pilaEsposas = pilaEsposas;
-	}
-	*/
-	
 	
 }

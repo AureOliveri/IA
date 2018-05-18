@@ -3,12 +3,12 @@ package test.java.ar.edu.utn.frba.ia.ag;
 import org.junit.Assert;
 import org.junit.Test;
 
+import main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 import main.java.ar.edu.utn.frba.ia.ag.Configuracion;
 import main.java.ar.edu.utn.frba.ia.ag.ConfiguracionDefault;
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 import main.java.ar.edu.utn.frba.ia.ag.paro.CantidadDeCiclos;
 import main.java.ar.edu.utn.frba.ia.ag.paro.CriterioDeParo;
-import src.main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 
 public class AlgoritmoGeneticoTest {
 	

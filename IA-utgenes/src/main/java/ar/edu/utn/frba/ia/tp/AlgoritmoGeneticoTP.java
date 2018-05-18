@@ -6,9 +6,9 @@ import java.util.logging.Handler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 import main.java.ar.edu.utn.frba.ia.ag.Configuracion;
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
-import src.main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 
 public class AlgoritmoGeneticoTP extends AlgoritmoGenetico {
 

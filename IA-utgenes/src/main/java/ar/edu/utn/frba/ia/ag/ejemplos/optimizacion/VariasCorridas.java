@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 import main.java.ar.edu.utn.frba.ia.ag.Configuracion;
 import main.java.ar.edu.utn.frba.ia.ag.ConfiguracionDefault;
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
-import src.main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 
 public class VariasCorridas {
 	

@@ -1,15 +1,10 @@
-package src.main.java.ar.edu.utn.frba.ia.ag;
+package main.java.ar.edu.utn.frba.ia.ag;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import main.java.ar.edu.utn.frba.ia.ag.Configuracion;
-import main.java.ar.edu.utn.frba.ia.ag.ConfiguracionDefault;
-import main.java.ar.edu.utn.frba.ia.ag.Estado;
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 
 public class AlgoritmoGenetico {
 	
