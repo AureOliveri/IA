@@ -94,7 +94,7 @@ public class Cromosoma extends Individuo {
 	@Override
 	public double aptitud() {
 				
-		return this.aptitudLiteratura() + this.aptitudOrtografia();
+		return this.aptitudLiteratura() + this.aptitudOrtografia() + this.aptitudRedaccion() + this.aptitudEtimologia();
 	}
 	
 
@@ -154,6 +154,34 @@ public class Cromosoma extends Individuo {
 		value+=this.aptitudGeneral(ortografia);
 		return value;
 	}
+	
+	private double aptitudRedaccion(){
+		double value=0;
+		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacci�n		
+		ProfesorEspecialidad redaccion = this.redaccion;
+		if(!redaccion.getPasatiempo().equals(Pasatiempo.Epigrama)){
+			value+=10;
+		} else {
+			value-=5;
+		}
+		value+=this.aptitudGeneral(redaccion);
+		return value;
+	}
+	
+	private double aptitudEtimologia(){
+		double value=0;
+		//TODO El profesor de etimolog�as dicta su clase junto al aula del aficionado a los pal�ndromos.		
+		ProfesorEspecialidad etimologia = this.etimologia;
+		if(!etimologia.getPasatiempo().equals(Pasatiempo.Palindromos)){
+			value+=10;
+		} else {
+			value-=5;
+		}
+		value+=this.aptitudGeneral(etimologia);
+		return value;
+	}
+	
+
 	
 	private double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad){
 		double value=0;
@@ -234,7 +262,6 @@ public class Cromosoma extends Individuo {
             }
         }
 
-
         // El profesor cuyo pasatiempo son las trivias bebe jugo.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Trivias)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Jugo)){
@@ -284,8 +311,15 @@ public class Cromosoma extends Individuo {
 		}
 		
 		//TODO El que es aficionado a los epigramas es vecino de aula del que toma agua
-		
-			
+		if((profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)
+			&& !profesorEspecialidad.getBebida().equals(Bebida.Agua))
+			|| !(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)
+				&& profesorEspecialidad.getBebida().equals(Bebida.Agua))){
+			value+=10;
+		} else {
+			value-=10;
+		}
+					
 		
 		return value;
 
