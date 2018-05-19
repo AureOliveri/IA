@@ -84,7 +84,7 @@ public class Cromosoma extends Individuo {
 	@Override
 	public double aptitud() {
 				
-		return this.aptitudLiteratura() + this.aptitudOrtografia() + this.aptitudRedaccion();
+		return this.aptitudLiteratura() + this.aptitudOrtografia() + this.aptitudRedaccion() + this.aptitudEtimologia();
 	}
 	
 
