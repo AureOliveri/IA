@@ -243,8 +243,7 @@ public class Cromosoma extends Individuo {
 		
 		//TODO El profesor aficionado a los epigramas imparte su curso junto al profesor de redacci�n.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
-		    if (profesorEspecialidad.getUbicacionAula().getNumVal() + 1 ==  getRedaccion().getUbicacionAula().getNumVal()
-                    || profesorEspecialidad.getUbicacionAula().getNumVal() - 1 ==  getRedaccion().getUbicacionAula().getNumVal()) {
+		    if (esVecinoDe(profesorEspecialidad, getRedaccion())) {
 		        value+=10;
 		    } else {
 		        value-=10;
@@ -254,8 +253,7 @@ public class Cromosoma extends Individuo {
 
 		//TODO El profesor de etimolog�as dicta su clase junto al aula del aficionado a los pal�ndromos.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)) {
-            if(profesorEspecialidad.getUbicacionAula().getNumVal() + 1 == getEtimologia().getUbicacionAula().getNumVal()
-                || profesorEspecialidad.getUbicacionAula().getNumVal() - 1 == getEtimologia().getUbicacionAula().getNumVal()) {
+            if(esVecinoDe(profesorEspecialidad, getEtimologia())) {
 		        value+=10;
             } else {
                 value-=10;
@@ -391,6 +389,21 @@ public class Cromosoma extends Individuo {
 		return buffer.toString();
 		//return (new Double(aptitud())).toString();
 	}
+
+	private Boolean esVecinoDe(ProfesorEspecialidad p1, ProfesorEspecialidad p2) {
+	    int ubiP1 = p1.getUbicacionAula().getNumVal();
+	    int ubiP2 = p2.getUbicacionAula().getNumVal();
+        switch (ubiP1) {
+            case 1:
+                return ubiP1 + 1 == ubiP2;
+            case 5:
+                return ubiP1 - 1 == ubiP2;
+            default:
+                return (ubiP1 + 1 == ubiP2 || ubiP1 - 1 == ubiP2);
+        }
+
+
+    }
 
 	
 }
