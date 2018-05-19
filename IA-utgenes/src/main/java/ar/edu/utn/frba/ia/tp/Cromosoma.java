@@ -165,8 +165,7 @@ public class Cromosoma extends Individuo {
 				value-=10;
 			}
 		}
-		
-		//TODO El aula verde está a la derecha del aula blanca 
+
 		
 		//El profesor del aula verde toma café
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
@@ -226,7 +225,35 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//TODO El decano imparte su cátedra junto al aula azul.
+		//El decano imparte su cátedra junto al aula azul.
+		//(Como se sabe que el decano está en la primer aula, entonces la azul es la segunda).
+		if(profesorEspecialidad.getColorAula().equals(ColorAula.Azul)){
+			if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Segunda)){
+				value+=10;
+			} else {
+				value-=10;
+			}		
+		}
+		
+		
+		//El aula verde está a la derecha del aula blanca
+		//Como se sabe que la azul es la segunda, la verde y la blanca nunca pueden ser la primera.
+		//Por lo tanto la verde solo puede ser la cuarta o la quinta.
+		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde) &&
+		  (profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Cuarta)
+		  || profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Quinta))){
+			value+=10;
+		} else {
+			value-=10;
+		}
+		//Sigue la logica de arriba (la blanca tiene que ser la tercera o cuarta) (No se si va)
+		if(profesorEspecialidad.getColorAula().equals(ColorAula.Blanca) &&
+		  (profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Tercera)
+		  || profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Cuarta))){
+			value+=10;
+		} else {
+			value-=10;
+		}
 		
 		//TODO El que es aficionado a los epigramas es vecino de aula del que toma agua
 		
