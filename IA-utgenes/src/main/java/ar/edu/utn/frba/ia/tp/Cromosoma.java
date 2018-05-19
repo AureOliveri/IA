@@ -162,7 +162,8 @@ public class Cromosoma extends Individuo {
 		double value=0;
 		//TODO El profesor de etimologías dicta su clase junto al aula del aficionado a los palíndromos.		
 		ProfesorEspecialidad etimologia = this.etimologia;
-		if(!etimologia.getPasatiempo().equals(Pasatiempo.Palíndromos)){
+		if(!etimologia.getPasatiempo().equals(Pasatiempo.Palíndromos) &&
+		   !etimologia.getColorAula().equals(ColorAula.Amarilla)){
 			value+=10;
 		} else {
 			value-=5;
