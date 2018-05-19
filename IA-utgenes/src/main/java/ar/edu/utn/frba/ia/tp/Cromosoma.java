@@ -144,7 +144,7 @@ public class Cromosoma extends Individuo {
 	
 	private double aptitudOrtografia(){
 		double value=0;
-		// El profesor aficionado a los crucigramas imparte el curso de ortografï¿½a.
+		// El profesor aficionado a los crucigramas imparte el curso de ortografía.
 		ProfesorEspecialidad ortografia = this.ortografia;
 		if(ortografia.getPasatiempo().equals(Pasatiempo.Crucigrama)){
 			value+=10;
@@ -157,7 +157,7 @@ public class Cromosoma extends Individuo {
 	
 	private double aptitudRedaccion(){
 		double value=0;
-		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacciï¿½n		
+		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacción		
 		ProfesorEspecialidad redaccion = this.redaccion;
 		if(!redaccion.getPasatiempo().equals(Pasatiempo.Epigrama)){
 			value+=10;
@@ -170,7 +170,7 @@ public class Cromosoma extends Individuo {
 	
 	private double aptitudEtimologia(){
 		double value=0;
-		//TODO El profesor de etimologï¿½as dicta su clase junto al aula del aficionado a los palï¿½ndromos.		
+		//TODO El profesor de etimologías dicta su clase junto al aula del aficionado a los palíndromos.		
 		ProfesorEspecialidad etimologia = this.etimologia;
 		if(!etimologia.getPasatiempo().equals(Pasatiempo.Palindromos) &&
 		   !etimologia.getColorAula().equals(ColorAula.Amarilla)){
@@ -187,7 +187,7 @@ public class Cromosoma extends Individuo {
 	private double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad){
 		double value=0;
 		
-		//El profesor que fuma pipa imparte cï¿½tedra en el aula roja.
+		//El profesor que fuma pipa imparte cátedra en el aula roja.
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Pipa)){
 			if(profesorEspecialidad.getColorAula().equals(ColorAula.Roja)){
 				value+=10;
@@ -196,7 +196,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//El profesor que es calvo toma tï¿½
+		//El profesor que es calvo toma té
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Calvo)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Te)){
 				value+=10;
@@ -206,7 +206,7 @@ public class Cromosoma extends Individuo {
 		}
 
 		
-		//El profesor del aula verde toma cafï¿½
+		//El profesor del aula verde toma café
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Cafe)){
 				value+=10;
@@ -215,7 +215,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//El profesor del aula amarilla es aficionado a los palï¿½ndromos.
+		//El profesor del aula amarilla es aficionado a los palíndromos.
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Amarilla)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)){
 				value+=10;
@@ -242,7 +242,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//TODO El profesor aficionado a los epigramas imparte su curso junto al profesor de redacciï¿½n.
+		//TODO El profesor aficionado a los epigramas imparte su curso junto al profesor de redacción.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
 		    if (profesorEspecialidad.getUbicacionAula().getNumVal() + 1 ==  getRedaccion().getUbicacionAula().getNumVal()
                     || profesorEspecialidad.getUbicacionAula().getNumVal() - 1 ==  getRedaccion().getUbicacionAula().getNumVal()) {
@@ -253,7 +253,7 @@ public class Cromosoma extends Individuo {
 		}
 
 
-		//TODO El profesor de etimologï¿½as dicta su clase junto al aula del aficionado a los palï¿½ndromos.
+		//TODO El profesor de etimologías dicta su clase junto al aula del aficionado a los palíndromos.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)) {
             if(profesorEspecialidad.getUbicacionAula().getNumVal() + 1 == getEtimologia().getUbicacionAula().getNumVal()
                 || profesorEspecialidad.getUbicacionAula().getNumVal() - 1 == getEtimologia().getUbicacionAula().getNumVal()) {
