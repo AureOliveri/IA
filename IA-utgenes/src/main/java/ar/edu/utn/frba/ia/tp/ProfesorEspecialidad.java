@@ -31,6 +31,7 @@ public class ProfesorEspecialidad {
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("{");
 		buffer.append("clase:"+this.clase);
+		buffer.append(",");
 		buffer.append("pasatiempo:"+this.pasatiempo);
 		buffer.append(",");
 		buffer.append("colorAula:"+this.colorAula);

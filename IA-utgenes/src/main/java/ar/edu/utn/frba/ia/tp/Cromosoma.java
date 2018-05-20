@@ -17,7 +17,7 @@ public class Cromosoma extends Individuo {
     private ProfesorEspecialidad ortografia;
     private ProfesorEspecialidad redaccion;
 
-    private List<ProfesorEspecialidad> profesores = new ArrayList<ProfesorEspecialidad>();
+    private List<ProfesorEspecialidad> profesores;
 	
 	public enum Clase {
 	    Gramatica, Literatura, Etimologia, Ortografia, Redaccion
@@ -125,12 +125,14 @@ public class Cromosoma extends Individuo {
 		this.setEtimologia(new ProfesorEspecialidad(Clase.Etimologia, pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
 		this.setOrtografia(new ProfesorEspecialidad(Clase.Ortografia, pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
 		this.setRedaccion(new ProfesorEspecialidad(Clase.Redaccion, pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
+        profesores = new ArrayList<>();
 		profesores.add(getRedaccion());
 		profesores.add(getEtimologia());
         profesores.add(getGramatica());
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
-		//this.printCromosoma();
+
+        this.printCromosoma();
 	}
 	
 	public void printCromosoma(){
@@ -317,6 +319,14 @@ public class Cromosoma extends Individuo {
 		this.redaccion = redaccion;
 	}
 
+    public List<ProfesorEspecialidad> getProfesores() {
+	    return profesores;
+    }
+
+	public void setProfesores(List<ProfesorEspecialidad> profesores) {
+	    this.profesores = profesores;
+    }
+
 
 	@Override
 	public Individuo generarRandom() {
@@ -333,8 +343,7 @@ public class Cromosoma extends Individuo {
 					+ ". Probablemente no tenga un constructor vacio."
 					+ " // CAUSA: " + e);
 		}
-		//return this.clone();
-		return null;
+		return this.clone();
 	}
 	
 	@Override
