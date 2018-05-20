@@ -406,7 +406,7 @@ public class Cromosoma extends Individuo {
         int repetidos = 0;
 
         int peculiares = profesores.stream().filter(p -> p.getPeculiaridad().equals(peculiar)).collect(toList()).size();
-        if (peculiares > 1) {repetidos+=peculiares;}
+        if (peculiares > 1) {repetidos+=peculiares-1;}
 
         return repetidos;
     }
