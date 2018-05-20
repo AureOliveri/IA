@@ -381,8 +381,66 @@ public class Cromosoma extends Individuo {
     private double penalizacionPorRepetidos() {
 	    double value = 0;
 
+	    value = (repetidosPeculiaridades() + repetidosColorAula() + repetidosUbicacionAula() + repetidosPasatiempos())*10;
+
 	    return value;
     }
 
+    private int repetidosPeculiaridades() {
+
+	    return cantidadConPeculiaridad(Peculiaridad.Decano) + cantidadConPeculiaridad(Peculiaridad.Barbon) + cantidadConPeculiaridad(Peculiaridad.Gafas) + cantidadConPeculiaridad(Peculiaridad.Pipa) + cantidadConPeculiaridad(Peculiaridad.Calvo);
+
+    }
+
+    private int cantidadConPeculiaridad(Peculiaridad peculiar) {
+        int repetidos = 0;
+
+        int peculiares = profesores.stream().filter(p -> p.getPeculiaridad().equals(peculiar)).collect(toList()).size();
+        if (peculiares > 1) {repetidos+=peculiares-1;}
+
+        return repetidos;
+    }
+
+    private int repetidosColorAula() {
+
+	    return cantidadConColorAula(ColorAula.Blanca) + cantidadConColorAula(ColorAula.Verde) + cantidadConColorAula(ColorAula.Azul) + cantidadConColorAula(ColorAula.Amarilla) + cantidadConColorAula(ColorAula.Roja);
+    }
+
+    private int cantidadConColorAula(ColorAula color) {
+        int repetidos = 0;
+
+        int coloridos = profesores.stream().filter(p -> p.getPeculiaridad().equals(color)).collect(toList()).size();
+        if (coloridos > 1) {repetidos+=coloridos-1;}
+
+        return repetidos;
+    }
+
+    private int repetidosUbicacionAula() {
+
+	    return cantidadConUbicacionAula(UbicacionAula.Primera) + cantidadConUbicacionAula(UbicacionAula.Segunda) + cantidadConUbicacionAula(UbicacionAula.Tercera) + cantidadConUbicacionAula(UbicacionAula.Cuarta) + cantidadConUbicacionAula(UbicacionAula.Quinta);
+    }
+
+    private int cantidadConUbicacionAula(UbicacionAula ubicacion) {
+        int repetidos = 0;
+
+        int ubicacionados = profesores.stream().filter(p -> p.getPeculiaridad().equals(ubicacion)).collect(toList()).size();
+        if (ubicacionados > 1) {repetidos+=ubicacionados-1;}
+
+        return repetidos;
+    }
+
+    private int repetidosPasatiempos() {
+
+	    return cantidadConPasatiempos(Pasatiempo.Epigrama) + cantidadConPasatiempos(Pasatiempo.Crucigrama) + cantidadConPasatiempos(Pasatiempo.Trivias) + cantidadConPasatiempos(Pasatiempo.Literati) + cantidadConPasatiempos(Pasatiempo.Palindromos);
+    }
+
+    private int cantidadConPasatiempos(Pasatiempo pasatiempo) {
+        int repetidos = 0;
+
+        int pasatiempos = profesores.stream().filter(p -> p.getPeculiaridad().equals(pasatiempo)).collect(toList()).size();
+        if (pasatiempos > 1) {repetidos+=pasatiempos-1;}
+
+        return repetidos;
+    }
 	
 }
