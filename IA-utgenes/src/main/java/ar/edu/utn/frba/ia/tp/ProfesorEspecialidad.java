@@ -5,9 +5,11 @@ import main.java.ar.edu.utn.frba.ia.tp.Cromosoma.ColorAula;
 import main.java.ar.edu.utn.frba.ia.tp.Cromosoma.Pasatiempo;
 import main.java.ar.edu.utn.frba.ia.tp.Cromosoma.Peculiaridad;
 import main.java.ar.edu.utn.frba.ia.tp.Cromosoma.UbicacionAula;
+import main.java.ar.edu.utn.frba.ia.tp.Cromosoma.Clase;
 
 public class ProfesorEspecialidad {
-	
+
+	private Clase clase;
 	private ColorAula colorAula;
 	private UbicacionAula ubicacionAula;
 	private Peculiaridad peculiaridad;
@@ -15,8 +17,9 @@ public class ProfesorEspecialidad {
 	private Pasatiempo pasatiempo;
 
 
-	public ProfesorEspecialidad(ColorAula colorAula, UbicacionAula ubicacionAula, 
+	public ProfesorEspecialidad(Clase clase, ColorAula colorAula, UbicacionAula ubicacionAula,
 				Peculiaridad peculiaridad, Bebida bebida, Pasatiempo pasatiempo) {
+		this.clase = clase;
 		this.colorAula = colorAula;
 		this.ubicacionAula = ubicacionAula;
 		this.peculiaridad = peculiaridad;
@@ -27,6 +30,7 @@ public class ProfesorEspecialidad {
 	public String printProfesorEspecialidad(){
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("{");
+		buffer.append("clase:"+this.clase);
 		buffer.append("pasatiempo:"+this.pasatiempo);
 		buffer.append(",");
 		buffer.append("colorAula:"+this.colorAula);
@@ -39,6 +43,10 @@ public class ProfesorEspecialidad {
 		buffer.append("}");		
 		return buffer.toString();
 	}
+
+	public Clase getClase() { return clase; }
+
+	public void setClase(Clase clase) { this.clase = clase; }
 
 	public ColorAula getColorAula() {
 		return colorAula;

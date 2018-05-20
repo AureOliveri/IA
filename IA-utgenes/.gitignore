@@ -1,3 +1,4 @@
-/.idea
+.idea/
 /bin/
 IA-utgenes/agTp.log
+*.iml
