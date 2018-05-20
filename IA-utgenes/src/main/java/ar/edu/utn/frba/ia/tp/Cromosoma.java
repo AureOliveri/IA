@@ -102,7 +102,7 @@ public class Cromosoma extends Individuo {
     @Override
     public double aptitud() {
 
-        return this.aptitudGeneral(this.literatura) + this.aptitudGeneral(this.ortografia) + this.aptitudGeneral(this.redaccion) + this.aptitudGeneral(this.etimologia) + this.aptitudGeneral(this.gramatica);
+        return penalizacionPorRepetidos() + this.aptitudGeneral(this.literatura) + this.aptitudGeneral(this.ortografia) + this.aptitudGeneral(this.redaccion) + this.aptitudGeneral(this.etimologia) + this.aptitudGeneral(this.gramatica);
     }
 
 
@@ -132,7 +132,7 @@ public class Cromosoma extends Individuo {
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
 
-        this.printCromosoma();
+        //this.printCromosoma();
 	}
 	
 	public void printCromosoma(){
@@ -147,7 +147,7 @@ public class Cromosoma extends Individuo {
 	private double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad) {
         double value = 0;
 
-        //El profesor que fuma pipa imparte cátedra en el aula roja.
+        //El profesor que fuma pipa imparte cï¿½tedra en el aula roja.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Pipa)) {
             if (profesorEspecialidad.getColorAula().equals(ColorAula.Roja)) {
                 value += 10;
@@ -165,7 +165,7 @@ public class Cromosoma extends Individuo {
             }
         }
 
-		//El profesor que es calvo toma té
+		//El profesor que es calvo toma tï¿½
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Calvo)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Te)){
 				value+=10;
@@ -174,7 +174,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 
-        //El aula verde esta a la derecha del aula blanca
+        //El aula verde esta a la izquierda del aula blanca
         if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)) {
             if (profesorEspecialidad.getUbicacionAula().getNumVal() + 1 == profesores.stream().filter(prof -> prof.getColorAula().equals(ColorAula.Blanca)).collect(toList()).get(0).getUbicacionAula().getNumVal()) {
                 value += 10;
@@ -183,7 +183,7 @@ public class Cromosoma extends Individuo {
             }
         }
 
-		//El profesor del aula verde toma café
+		//El profesor del aula verde toma cafï¿½
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Cafe)){
 				value+=10;
@@ -192,7 +192,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 
-        // El profesor aficionado a los crucigramas imparte el curso de ortografía.
+        // El profesor aficionado a los crucigramas imparte el curso de ortografï¿½a.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Crucigrama)) {
             if (profesorEspecialidad.getClase().equals(Clase.Ortografia)) {
                 value += 10;
@@ -201,7 +201,7 @@ public class Cromosoma extends Individuo {
             }
         }
 		
-		//El profesor del aula amarilla es aficionado a los palíndromos.
+		//El profesor del aula amarilla es aficionado a los palï¿½ndromos.
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Amarilla)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)){
 				value+=10;
@@ -228,7 +228,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacción.
+		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacciï¿½n.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
 		    if (esVecinoDe(profesorEspecialidad, getRedaccion())) {
 		        value+=10;
@@ -238,7 +238,7 @@ public class Cromosoma extends Individuo {
 		}
 
 
-		//El profesor de etimologías dicta su clase junto al aula del aficionado a los palíndromos.
+		//El profesor de etimologï¿½as dicta su clase junto al aula del aficionado a los palï¿½ndromos.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)) {
             if(esVecinoDe(profesorEspecialidad, getEtimologia())) {
 		        value+=10;
@@ -343,7 +343,8 @@ public class Cromosoma extends Individuo {
 					+ ". Probablemente no tenga un constructor vacio."
 					+ " // CAUSA: " + e);
 		}
-		return this.clone();
+		//return this.clone();
+        return null;
 	}
 	
 	@Override
@@ -375,6 +376,12 @@ public class Cromosoma extends Individuo {
         }
 
 
+    }
+
+    private double penalizacionPorRepetidos() {
+	    double value = 0;
+
+	    return value;
     }
 
 	
