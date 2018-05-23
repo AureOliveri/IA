@@ -6,8 +6,13 @@ import java.util.Stack;
 import java.util.logging.Logger;
 
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
+import main.java.ar.edu.utn.frba.ia.ag.UTgeNesUtils;
 
 import static java.util.stream.Collectors.toList;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class Cromosoma extends Individuo {
 
@@ -51,6 +56,47 @@ public class Cromosoma extends Individuo {
 	
 	public enum Pasatiempo{
 		Palindromos, Epigrama, Crucigrama, Literati, Trivias
+	}
+	
+
+	@Override
+	public void mutar() {
+		
+		Individuo individuoRandom = this.generarRandom(); // genero uno nuevo individuo random sólo para robarle el atributo que necesito "mutado"
+		boolean stop = false;
+		
+		Field atributoAleatorio = (Field)UTgeNesUtils.alguno(this.getClass().getDeclaredFields());
+		Method getter = UTgeNesUtils.armarGetter(this, atributoAleatorio);
+		stop = false;
+		while(stop) {
+			try {
+				if(getter.invoke(individuoRandom).getClass() == profesores.getClass()) {
+					atributoAleatorio = (Field)UTgeNesUtils.alguno(this.getClass().getDeclaredFields());
+					getter = UTgeNesUtils.armarGetter(this, atributoAleatorio);
+				} else {
+					stop = true;
+				}
+			} catch (Exception e) { }
+		}
+		
+//		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Mutando atributo: " + atributoAleatorio.getName());
+		Method setter = UTgeNesUtils.armarSetter(this, atributoAleatorio);
+		
+		try {
+			
+			setter.invoke(this, getter.invoke(individuoRandom)); // reemplazo el atributo de mi individuo por el atributo de mi individuo random
+		}
+		catch (Exception e) {
+			Logger.getLogger(
+				Logger.GLOBAL_LOGGER_NAME).severe(
+					"Fallo intentando acceder al atributo '"
+					+ atributoAleatorio
+					+ "' del Idividuo: "
+					+ this.toString()
+					+ "// CAUSA: " + e);
+		}
+		
+		return;
 	}
 
 	private void cargarPilaColorAula(Stack<ColorAula> pilaColoresAula){
@@ -159,7 +205,7 @@ public class Cromosoma extends Individuo {
             if (profesorEspecialidad.getColorAula().equals(ColorAula.Roja)) {
                 value+=80;
             } else {
-                value-=20;
+                value-=40;
             }
         }
 
@@ -168,7 +214,7 @@ public class Cromosoma extends Individuo {
             if (profesorEspecialidad.getClase().equals(Clase.Literatura)) {
                 value+=80;
             } else {
-                value-=20;
+                value-=40;
             }
         }
 
@@ -177,7 +223,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getBebida().equals(Bebida.Te)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 
@@ -187,7 +233,7 @@ public class Cromosoma extends Individuo {
             if (profe.size() > 0) {
                 value+=80;
             } else {
-                value-=20;
+                value-=40;
             }
         }
 
@@ -196,7 +242,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getBebida().equals(Bebida.Cafe)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 
@@ -205,7 +251,7 @@ public class Cromosoma extends Individuo {
             if (profesorEspecialidad.getClase().equals(Clase.Ortografia)) {
                 value+=80;
             } else {
-                value-=20;
+                value-=40;
             }
         }
 		
@@ -214,7 +260,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 		
@@ -223,7 +269,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getBebida().equals(Bebida.Leche)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 		
@@ -232,7 +278,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Primera)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 		
@@ -241,7 +287,7 @@ public class Cromosoma extends Individuo {
 		    if (esVecinoDe(profesorEspecialidad, getRedaccion())) {
 		        value+=80;
 		    } else {
-		        value-=20;
+		        value-=40;
 		    }
 		}
 
@@ -251,7 +297,7 @@ public class Cromosoma extends Individuo {
             if(esVecinoDe(profesorEspecialidad, getEtimologia())) {
 		        value+=80;
             } else {
-                value-=20;
+                value-=40;
             }
         }
 
@@ -260,7 +306,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getBebida().equals(Bebida.Jugo)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 		
@@ -269,7 +315,7 @@ public class Cromosoma extends Individuo {
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Literati)){
 				value+=80;
 			} else {
-				value-=20;
+				value-=40;
 			}
 		}
 		
@@ -279,7 +325,7 @@ public class Cromosoma extends Individuo {
 		    if(profes.size() > 0) {
 		        value+=80;
             } else {
-		        value-=20;
+		        value-=40;
             }
         }
 		
@@ -289,7 +335,7 @@ public class Cromosoma extends Individuo {
             if (profes.size() > 0) {
                 value+=80;
             } else {
-                value-=20;
+                value-=40;
             }
         }
 					
@@ -343,7 +389,7 @@ public class Cromosoma extends Individuo {
 		Individuo nuevoInd;
 		
 		try {
-			nuevoInd = this.getClass().newInstance();
+			nuevoInd = new Cromosoma();
 			return nuevoInd;
 		} catch (Exception e) {
 			Logger.getLogger(
@@ -393,7 +439,7 @@ public class Cromosoma extends Individuo {
     private double penalizacionPorRepetidos() {
 	    double value = 0;
 
-	    value = (repetidosPeculiaridades() + repetidosColorAula() + repetidosUbicacionAula() + repetidosPasatiempos() + repetidosBebidas())*-30;
+	    value = (repetidosPeculiaridades() + repetidosColorAula() + repetidosUbicacionAula() + repetidosPasatiempos() + repetidosBebidas())*-60;
 
 	    return value;
     }
