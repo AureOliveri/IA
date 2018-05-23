@@ -11,22 +11,23 @@ import org.junit.Test;
 import main.java.ar.edu.utn.frba.ia.ag.AlgoritmoGenetico;
 import main.java.ar.edu.utn.frba.ia.ag.Configuracion;
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
+import main.java.ar.edu.utn.frba.ia.ag.cruzamiento.BinomialAzar;
+import main.java.ar.edu.utn.frba.ia.ag.mutacion.MutacionSimple;
 import main.java.ar.edu.utn.frba.ia.ag.paro.CantidadDeCiclos;
 import main.java.ar.edu.utn.frba.ia.ag.paro.CriterioDeParo;
+import main.java.ar.edu.utn.frba.ia.ag.seleccion.Ranking;
 
 public class AlgoritmoGeneticoTPTest {
 	
 
-	@Test
+	//@Test
 	public void testUnaVuelta() {
-		System.out.println(crearPerfecto().aptitud());
+		//System.out.println(crearPerfecto().aptitud());
 	
 		
 		Configuracion config = new ConfiguracionTP();
 
 		List<Integer> valores = new ArrayList<Integer>();
-		
-		for(int i=0;i<10;i++) {
 			AlgoritmoGenetico ag = new AlgoritmoGeneticoTP(config, Cromosoma.class);
 			Individuo resultado = ag.ejecutar();
 			Assert.assertNotNull(resultado);
@@ -39,11 +40,7 @@ public class AlgoritmoGeneticoTPTest {
 				valor+=(((Cromosoma)resultado).getGramatica().getPasatiempo()==Cromosoma.Pasatiempo.Literati)?1:0;
 				valor+=(((Cromosoma)resultado).getGramatica().getUbicacionAula()==Cromosoma.UbicacionAula.Cuarta)?1:0;
 				valor+=(((Cromosoma)resultado).getGramatica().getColorAula()==Cromosoma.ColorAula.Verde)?1:0;
-		valores.add(valor);
-		}
-		valores.forEach(a->System.out.print(a+" | "));
-	
-		
+			System.out.println(valor);				//Cantidad de condiciones del profesor de gramatica que fueron correctas
 	}
 	
 	private Cromosoma crearPerfecto() {
@@ -79,6 +76,41 @@ public class AlgoritmoGeneticoTPTest {
 			perfecto.getLiteratura().setColorAula(Cromosoma.ColorAula.Blanca);
 			
 		return perfecto;
+	}
+	
+	
+	@Test
+	public void config1() {
+		Configuracion config = new ConfiguracionTP();
+		config.setCriterioDeParo(new CantidadDeCiclos(1000L));
+		config.setPoblacionInicial(100);
+		config.setMetodoDeSeleccion(new Ranking(3));
+		config.setCruzamiento(new BinomialAzar());
+		config.setMutacion(new MutacionSimple(0.8));
+		correrTest(config,1);
+	}		
+
+	
+	
+	
+	
+	private void correrTest(Configuracion config, int numero_config) {
+	List<Integer> valores = new ArrayList<Integer>();
+	for(int i=0;i<20;i++) {
+			AlgoritmoGenetico ag = new AlgoritmoGeneticoTP(config, Cromosoma.class);
+			Individuo resultado = ag.ejecutar();
+			Assert.assertNotNull(resultado);
+			int valor=0;
+				valor+=(((Cromosoma)resultado).getGramatica().getPeculiaridad()==Cromosoma.Peculiaridad.Barbon)?1:0;
+				valor+=(((Cromosoma)resultado).getGramatica().getBebida()==Cromosoma.Bebida.Cafe)?1:0;
+				valor+=(((Cromosoma)resultado).getGramatica().getPasatiempo()==Cromosoma.Pasatiempo.Literati)?1:0;
+				valor+=(((Cromosoma)resultado).getGramatica().getUbicacionAula()==Cromosoma.UbicacionAula.Cuarta)?1:0;
+				valor+=(((Cromosoma)resultado).getGramatica().getColorAula()==Cromosoma.ColorAula.Verde)?1:0;
+		valores.add(valor);
+		}
+		System.out.println("======CONFIG "+numero_config+"======");
+		valores.forEach(a->System.out.print(a+" | "));
+		
 	}
 	
 	

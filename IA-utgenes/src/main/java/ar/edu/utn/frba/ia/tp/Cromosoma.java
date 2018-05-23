@@ -191,7 +191,7 @@ public class Cromosoma extends Individuo {
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
 
-        this.printCromosoma();
+      //  this.printCromosoma();
 	}
 	
 	public void printCromosoma(){
@@ -205,8 +205,8 @@ public class Cromosoma extends Individuo {
 	}
 
 	public double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad) {
-		final int POSITIVO=10;
-		final int NEGATIVO=-2;
+		final int POSITIVO=100;
+		final int NEGATIVO=-3;
 		
         double value = 0;
 
@@ -225,6 +225,7 @@ public class Cromosoma extends Individuo {
             if (profesorEspecialidad.getClase().equals(Clase.Literatura)) {
                 value+=POSITIVO;
             } else {
+   
                 value+=NEGATIVO;
 
             }
@@ -245,7 +246,7 @@ public class Cromosoma extends Individuo {
             									.filter(prof -> 
             										(prof.getColorAula().equals(ColorAula.Blanca))
             										&& (prof.getUbicacionAula().getNumVal() == profesorEspecialidad.getUbicacionAula().getNumVal() + 1))
-            														.collect(toList());
+            									.collect(toList());
             if (profe.size() > 0) {
                 value+=POSITIVO;
             } else {
@@ -460,7 +461,7 @@ public class Cromosoma extends Individuo {
     }
 
     private double penalizacionPorRepetidos() {
-    	int VALOR_PENALIZACION = -3;
+    	int VALOR_PENALIZACION = -2;
     	
 	    double value = 0;
 	    value = (repetidosPeculiaridades() 
