@@ -24,6 +24,7 @@ public class ConfiguracionTP extends Configuracion {
 				new BinomialAzar(), // cruzamiento
 				new MutacionAdaptativaPorConvergencia());
 				//new MutacionSimple(0.5)); // mutacion
+
 	}
 
 // Criterio de Paro
