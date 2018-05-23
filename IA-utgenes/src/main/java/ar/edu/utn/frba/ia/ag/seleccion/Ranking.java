@@ -21,8 +21,10 @@ public class Ranking extends Seleccion {
 		Collections.sort(individuos);
 		
 		// Tengo en cuenta la cantidad que quiero seleccionar y elimino los restantes
+		int i = 0;
 		while (individuos.size() > this.cantSeleccion) {
-			individuos.remove(individuos.size() - 1);
+			individuos.remove(i);
+			i++;
 		}
 		
 		return this.generarCopias(individuos, estado);

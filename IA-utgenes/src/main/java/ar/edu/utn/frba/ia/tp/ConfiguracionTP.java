@@ -4,8 +4,11 @@ import main.java.ar.edu.utn.frba.ia.ag.Configuracion;
 import main.java.ar.edu.utn.frba.ia.ag.cruzamiento.BinomialAzar;
 import main.java.ar.edu.utn.frba.ia.ag.cruzamiento.MultiPunto;
 import main.java.ar.edu.utn.frba.ia.ag.cruzamiento.Simple;
+import main.java.ar.edu.utn.frba.ia.ag.mutacion.MutacionAdaptativaPorConvergencia;
 import main.java.ar.edu.utn.frba.ia.ag.mutacion.MutacionSimple;
+import main.java.ar.edu.utn.frba.ia.ag.paro.AptitudMinima;
 import main.java.ar.edu.utn.frba.ia.ag.paro.CantidadDeCiclos;
+import main.java.ar.edu.utn.frba.ia.ag.paro.TiempoTranscurrido;
 import main.java.ar.edu.utn.frba.ia.ag.seleccion.Ranking;
 import main.java.ar.edu.utn.frba.ia.ag.seleccion.Ruleta;
 import main.java.ar.edu.utn.frba.ia.ag.seleccion.Torneo;
@@ -15,11 +18,11 @@ public class ConfiguracionTP extends Configuracion {
 	
 	public ConfiguracionTP() {
 		
-		super(new CantidadDeCiclos(200L), // criterio de paro
-				5000, // cantIndividuosIniciales
-				new Ruleta(), // seleccion
+		super(new AptitudMinima(900), // criterio de paro
+				500, // cantIndividuosIniciales
+				new Torneo(), // seleccion
 				new BinomialAzar(), // cruzamiento
-				new MutacionSimple(0)); // mutacion
+				new MutacionSimple(0.5)); // mutacion
 	}
 
 // Criterio de Paro

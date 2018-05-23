@@ -139,7 +139,7 @@ public class Cromosoma extends Individuo {
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
 
-        //this.printCromosoma();
+        this.printCromosoma();
 	}
 	
 	public void printCromosoma(){
@@ -157,27 +157,27 @@ public class Cromosoma extends Individuo {
         //El profesor que fuma pipa imparte c�tedra en el aula roja.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Pipa)) {
             if (profesorEspecialidad.getColorAula().equals(ColorAula.Roja)) {
-                value+=30;
+                value+=80;
             } else {
-                value-=5;
+                value-=20;
             }
         }
 
         // El profesor que usa gafas imparte el curso de literatura.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Gafas)) {
             if (profesorEspecialidad.getClase().equals(Clase.Literatura)) {
-                value+=30;
+                value+=80;
             } else {
-                value-=5;
+                value-=20;
             }
         }
 
 		//El profesor que es calvo toma t�
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Calvo)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Te)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 
@@ -185,63 +185,63 @@ public class Cromosoma extends Individuo {
         if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)) {
             List<ProfesorEspecialidad> profe = profesores.stream().filter(prof -> (prof.getColorAula().equals(ColorAula.Blanca)) && (prof.getUbicacionAula().getNumVal() == profesorEspecialidad.getUbicacionAula().getNumVal() + 1)).collect(toList());
             if (profe.size() > 0) {
-                value+=30;
+                value+=80;
             } else {
-                value-=5;
+                value-=20;
             }
         }
 
 		//El profesor del aula verde toma caf�
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Cafe)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 
         // El profesor aficionado a los crucigramas imparte el curso de ortograf�a.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Crucigrama)) {
             if (profesorEspecialidad.getClase().equals(Clase.Ortografia)) {
-                value+=30;
+                value+=80;
             } else {
-                value-=5;
+                value-=20;
             }
         }
 		
 		//El profesor del aula amarilla es aficionado a los pal�ndromos.
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Amarilla)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 		
 		// El que imparte clases en el aula del centro toma leche
 		if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Tercera)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Leche)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 		
 		//El decano de la universidad imparte su catedra en la primera aula.
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)){
 			if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Primera)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 		
 		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacci�n.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
 		    if (esVecinoDe(profesorEspecialidad, getRedaccion())) {
-		        value+=30;
+		        value+=80;
 		    } else {
-		        value-=5;
+		        value-=20;
 		    }
 		}
 
@@ -249,27 +249,27 @@ public class Cromosoma extends Individuo {
 		//El profesor de etimolog�as dicta su clase junto al aula del aficionado a los pal�ndromos.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)) {
             if(esVecinoDe(profesorEspecialidad, getEtimologia())) {
-		        value+=30;
+		        value+=80;
             } else {
-                value-=5;
+                value-=20;
             }
         }
 
         // El profesor cuyo pasatiempo son las trivias bebe jugo.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Trivias)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Jugo)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 		
 		// El profesor que es barbon es aficionado al literati (scrabble).
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Barbon)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Literati)){
-				value+=30;
+				value+=80;
 			} else {
-				value-=5;
+				value-=20;
 			}
 		}
 		
@@ -277,9 +277,9 @@ public class Cromosoma extends Individuo {
         if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)) {
             List<ProfesorEspecialidad> profes = profesores.stream().filter(prof -> prof.getColorAula().equals(ColorAula.Azul) && esVecinoDe(profesorEspecialidad,prof)).collect(toList());
 		    if(profes.size() > 0) {
-		        value+=30;
+		        value+=80;
             } else {
-		        value-=5;
+		        value-=20;
             }
         }
 		
@@ -287,9 +287,9 @@ public class Cromosoma extends Individuo {
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
             List<ProfesorEspecialidad> profes = profesores.stream().filter(prof -> prof.getBebida().equals(Bebida.Agua) && esVecinoDe(profesorEspecialidad,prof)).collect(toList());
             if (profes.size() > 0) {
-                value+=30;
+                value+=80;
             } else {
-                value-=5;
+                value-=20;
             }
         }
 					
@@ -353,25 +353,27 @@ public class Cromosoma extends Individuo {
 					+ ". Probablemente no tenga un constructor vacio."
 					+ " // CAUSA: " + e);
 		}
-		//return this.clone();
-        return null;
+		return this.clone();
 	}
 	
 	@Override
 	public String toString() {
-		StringBuffer buffer=new StringBuffer();
-		
-		buffer.append("\r\n");
-		buffer.append("Gramatica: "+this.gramatica.printProfesorEspecialidad()+"\r\n");
-		buffer.append("Literatura: "+this.literatura.printProfesorEspecialidad()+"\r\n");
-		buffer.append("Etimologia: "+this.etimologia.printProfesorEspecialidad()+"\r\n");
-		buffer.append("Ortografia: "+this.ortografia.printProfesorEspecialidad()+"\r\n");
-		buffer.append("Redaccion: "+this.redaccion.printProfesorEspecialidad()+"\r\n");
-		buffer.append("Aptitud: "+(new Double(aptitud())).toString()+"\r\n");
-		
-		return buffer.toString();
-		//return (new Double(aptitud())).toString();
+		return (new Double(aptitud())).toString();
 	}
+
+	public String completeCrom() {
+        StringBuffer buffer=new StringBuffer();
+
+        buffer.append("\r\n");
+        buffer.append("Gramatica: "+this.gramatica.printProfesorEspecialidad()+"\r\n");
+        buffer.append("Literatura: "+this.literatura.printProfesorEspecialidad()+"\r\n");
+        buffer.append("Etimologia: "+this.etimologia.printProfesorEspecialidad()+"\r\n");
+        buffer.append("Ortografia: "+this.ortografia.printProfesorEspecialidad()+"\r\n");
+        buffer.append("Redaccion: "+this.redaccion.printProfesorEspecialidad()+"\r\n");
+        buffer.append("Aptitud: "+(new Double(aptitud())).toString()+"\r\n");
+
+        return buffer.toString();
+    }
 
 	private Boolean esVecinoDe(ProfesorEspecialidad p1, ProfesorEspecialidad p2) {
 	    int ubiP1 = p1.getUbicacionAula().getNumVal();
@@ -391,7 +393,7 @@ public class Cromosoma extends Individuo {
     private double penalizacionPorRepetidos() {
 	    double value = 0;
 
-	    value = (repetidosPeculiaridades() + repetidosColorAula() + repetidosUbicacionAula() + repetidosPasatiempos())*-50;
+	    value = (repetidosPeculiaridades() + repetidosColorAula() + repetidosUbicacionAula() + repetidosPasatiempos() + repetidosBebidas())*-30;
 
 	    return value;
     }
@@ -419,7 +421,7 @@ public class Cromosoma extends Individuo {
     private int cantidadConColorAula(ColorAula color) {
         int repetidos = 0;
 
-        int coloridos = profesores.stream().filter(p -> p.getPeculiaridad().equals(color)).collect(toList()).size();
+        int coloridos = profesores.stream().filter(p -> p.getColorAula().equals(color)).collect(toList()).size();
         if (coloridos > 1) {repetidos+=coloridos-1;}
 
         return repetidos;
@@ -433,7 +435,7 @@ public class Cromosoma extends Individuo {
     private int cantidadConUbicacionAula(UbicacionAula ubicacion) {
         int repetidos = 0;
 
-        int ubicacionados = profesores.stream().filter(p -> p.getPeculiaridad().equals(ubicacion)).collect(toList()).size();
+        int ubicacionados = profesores.stream().filter(p -> p.getUbicacionAula().equals(ubicacion)).collect(toList()).size();
         if (ubicacionados > 1) {repetidos+=ubicacionados-1;}
 
         return repetidos;
@@ -447,8 +449,22 @@ public class Cromosoma extends Individuo {
     private int cantidadConPasatiempos(Pasatiempo pasatiempo) {
         int repetidos = 0;
 
-        int pasatiempos = profesores.stream().filter(p -> p.getPeculiaridad().equals(pasatiempo)).collect(toList()).size();
+        int pasatiempos = profesores.stream().filter(p -> p.getPasatiempo().equals(pasatiempo)).collect(toList()).size();
         if (pasatiempos > 1) {repetidos+=pasatiempos-1;}
+
+        return repetidos;
+    }
+
+    private int repetidosBebidas() {
+
+        return cantidadConBebida(Bebida.Agua) + cantidadConBebida(Bebida.Cafe) + cantidadConBebida(Bebida.Te) + cantidadConBebida(Bebida.Leche) + cantidadConBebida(Bebida.Jugo);
+    }
+
+    private int cantidadConBebida(Bebida bebida) {
+        int repetidos = 0;
+
+        int bebidas = profesores.stream().filter(p -> p.getBebida().equals(bebida)).collect(toList()).size();
+        if (bebidas > 1) {repetidos+=bebidas-1;}
 
         return repetidos;
     }

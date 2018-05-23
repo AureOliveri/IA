@@ -1,5 +1,6 @@
 package main.java.ar.edu.utn.frba.ia.tp;
 
+import main.java.ar.edu.utn.frba.ia.ag.paro.AptitudMinima;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,11 +14,9 @@ public class AlgoritmoGeneticoTPTest {
 	
 	@Test
 	public void testUnaVuelta() {
-		
-		CriterioDeParo paroInstantaneo = new CantidadDeCiclos(500L);
+
 		Configuracion config = new ConfiguracionTP();
-		config.setCriterioDeParo(paroInstantaneo);
-		
+
 		AlgoritmoGenetico ag = new AlgoritmoGeneticoTP(config, Cromosoma.class);
 		Individuo resultado = ag.ejecutar();
 		Assert.assertNotNull(resultado);
