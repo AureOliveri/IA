@@ -18,11 +18,12 @@ public class ConfiguracionTP extends Configuracion {
 	
 	public ConfiguracionTP() {
 		
-		super(new AptitudMinima(900), // criterio de paro
-				500, // cantIndividuosIniciales
+		super(new CantidadDeCiclos(200L), // criterio de paro
+				50, // cantIndividuosIniciales
 				new Torneo(), // seleccion
 				new BinomialAzar(), // cruzamiento
-				new MutacionSimple(0.5)); // mutacion
+				new MutacionAdaptativaPorConvergencia());
+				//new MutacionSimple(0.5)); // mutacion
 	}
 
 // Criterio de Paro
