@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class Cromosoma extends Individuo {
+	
 
     private ProfesorEspecialidad literatura;
     private ProfesorEspecialidad gramatica;
@@ -155,7 +156,12 @@ public class Cromosoma extends Individuo {
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
 
-        return penalizacionPorRepetidos() + this.aptitudGeneral(this.literatura) + this.aptitudGeneral(this.ortografia) + this.aptitudGeneral(this.redaccion) + this.aptitudGeneral(this.etimologia) + this.aptitudGeneral(this.gramatica);
+        return penalizacionPorRepetidos() 
+        		+ this.aptitudGeneral(this.literatura)
+        		+ this.aptitudGeneral(this.ortografia)
+        		+ this.aptitudGeneral(this.redaccion)
+        		+ this.aptitudGeneral(this.etimologia)
+        		+ this.aptitudGeneral(this.gramatica);
     }
 
 
@@ -194,100 +200,111 @@ public class Cromosoma extends Individuo {
 		System.out.println("Etimolog�a: "+this.etimologia.printProfesorEspecialidad());
 		System.out.println("Ortograf�a: "+this.ortografia.printProfesorEspecialidad());
 		System.out.println("Redacci�n: "+this.redaccion.printProfesorEspecialidad());
+	    System.out.println(this.aptitud());
 		System.out.println("====================================");
 	}
 
-	private double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad) {
+	public double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad) {
+		final int POSITIVO=10;
+		final int NEGATIVO=-2;
+		
         double value = 0;
 
         //El profesor que fuma pipa imparte c�tedra en el aula roja.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Pipa)) {
             if (profesorEspecialidad.getColorAula().equals(ColorAula.Roja)) {
-                value+=80;
+                value+=POSITIVO;
             } else {
-                value-=40;
+                value+=NEGATIVO;
+
             }
         }
 
         // El profesor que usa gafas imparte el curso de literatura.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Gafas)) {
             if (profesorEspecialidad.getClase().equals(Clase.Literatura)) {
-                value+=80;
+                value+=POSITIVO;
             } else {
-                value-=40;
+                value+=NEGATIVO;
+
             }
         }
 
 		//El profesor que es calvo toma t�
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Calvo)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Te)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				 value+=NEGATIVO;
 			}
 		}
 
         //El aula verde esta a la izquierda del aula blanca
         if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)) {
-            List<ProfesorEspecialidad> profe = profesores.stream().filter(prof -> (prof.getColorAula().equals(ColorAula.Blanca)) && (prof.getUbicacionAula().getNumVal() == profesorEspecialidad.getUbicacionAula().getNumVal() + 1)).collect(toList());
+            List<ProfesorEspecialidad> profe = profesores.stream()
+            									.filter(prof -> 
+            										(prof.getColorAula().equals(ColorAula.Blanca))
+            										&& (prof.getUbicacionAula().getNumVal() == profesorEspecialidad.getUbicacionAula().getNumVal() + 1))
+            														.collect(toList());
             if (profe.size() > 0) {
-                value+=80;
+                value+=POSITIVO;
             } else {
-                value-=40;
+            	value+=NEGATIVO;
+
             }
         }
 
 		//El profesor del aula verde toma caf�
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Cafe)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				  value+=NEGATIVO;
 			}
 		}
 
         // El profesor aficionado a los crucigramas imparte el curso de ortograf�a.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Crucigrama)) {
             if (profesorEspecialidad.getClase().equals(Clase.Ortografia)) {
-                value+=80;
+                value+=POSITIVO;
             } else {
-                value-=40;
+                value+=NEGATIVO;
             }
         }
 		
 		//El profesor del aula amarilla es aficionado a los pal�ndromos.
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Amarilla)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				value+=NEGATIVO;
 			}
 		}
 		
 		// El que imparte clases en el aula del centro toma leche
 		if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Tercera)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Leche)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				value+=NEGATIVO;
 			}
 		}
 		
 		//El decano de la universidad imparte su catedra en la primera aula.
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)){
 			if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Primera)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				value+=NEGATIVO;
 			}
 		}
 		
 		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacci�n.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
 		    if (esVecinoDe(profesorEspecialidad, getRedaccion())) {
-		        value+=80;
+		        value+=POSITIVO;
 		    } else {
-		        value-=40;
+		        value+=NEGATIVO;
 		    }
 		}
 
@@ -295,47 +312,53 @@ public class Cromosoma extends Individuo {
 		//El profesor de etimolog�as dicta su clase junto al aula del aficionado a los pal�ndromos.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)) {
             if(esVecinoDe(profesorEspecialidad, getEtimologia())) {
-		        value+=80;
+		        value+=POSITIVO;
             } else {
-                value-=40;
+                value+=NEGATIVO;
             }
         }
 
         // El profesor cuyo pasatiempo son las trivias bebe jugo.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Trivias)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Jugo)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				value+=NEGATIVO;
 			}
 		}
 		
 		// El profesor que es barbon es aficionado al literati (scrabble).
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Barbon)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Literati)){
-				value+=80;
+				value+=POSITIVO;
 			} else {
-				value-=40;
+				value+=NEGATIVO;
 			}
 		}
 		
 		//El decano imparte su catedra junto al aula azul.
         if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)) {
-            List<ProfesorEspecialidad> profes = profesores.stream().filter(prof -> prof.getColorAula().equals(ColorAula.Azul) && esVecinoDe(profesorEspecialidad,prof)).collect(toList());
+            List<ProfesorEspecialidad> profes = profesores.stream()
+            									.filter(prof -> prof.getColorAula().equals(ColorAula.Azul) 
+            											&& esVecinoDe(profesorEspecialidad,prof))
+            									.collect(toList());
 		    if(profes.size() > 0) {
-		        value+=80;
+		        value+=POSITIVO;
             } else {
-		        value-=40;
+		        value+=NEGATIVO;
             }
         }
 		
 		//El que es aficionado a los epigramas es vecino de aula del que toma agua
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
-            List<ProfesorEspecialidad> profes = profesores.stream().filter(prof -> prof.getBebida().equals(Bebida.Agua) && esVecinoDe(profesorEspecialidad,prof)).collect(toList());
+            List<ProfesorEspecialidad> profes = profesores.stream()
+            									.filter(prof -> prof.getBebida().equals(Bebida.Agua) 
+            											&& esVecinoDe(profesorEspecialidad,prof))
+            									.collect(toList());
             if (profes.size() > 0) {
-                value+=80;
+                value+=POSITIVO;
             } else {
-                value-=40;
+                value+=NEGATIVO;
             }
         }
 					
@@ -437,31 +460,46 @@ public class Cromosoma extends Individuo {
     }
 
     private double penalizacionPorRepetidos() {
+    	int VALOR_PENALIZACION = -3;
+    	
 	    double value = 0;
-
-	    value = (repetidosPeculiaridades() + repetidosColorAula() + repetidosUbicacionAula() + repetidosPasatiempos() + repetidosBebidas())*-60;
+	    value = (repetidosPeculiaridades() 
+	    		+ repetidosColorAula() 
+	    		+ repetidosUbicacionAula() 
+	    		+ repetidosPasatiempos() 
+	    		+ repetidosBebidas())*VALOR_PENALIZACION;
 
 	    return value;
     }
 
     private int repetidosPeculiaridades() {
 
-	    return cantidadConPeculiaridad(Peculiaridad.Decano) + cantidadConPeculiaridad(Peculiaridad.Barbon) + cantidadConPeculiaridad(Peculiaridad.Gafas) + cantidadConPeculiaridad(Peculiaridad.Pipa) + cantidadConPeculiaridad(Peculiaridad.Calvo);
+	    return cantidadConPeculiaridad(Peculiaridad.Decano)
+	    		+ cantidadConPeculiaridad(Peculiaridad.Barbon)
+	    		+ cantidadConPeculiaridad(Peculiaridad.Gafas)
+	    		+ cantidadConPeculiaridad(Peculiaridad.Pipa)
+	    		+ cantidadConPeculiaridad(Peculiaridad.Calvo);
 
     }
 
     private int cantidadConPeculiaridad(Peculiaridad peculiar) {
         int repetidos = 0;
 
-        int peculiares = profesores.stream().filter(p -> p.getPeculiaridad().equals(peculiar)).collect(toList()).size();
+        int peculiares = profesores.stream()
+        				.filter(p -> p.getPeculiaridad().equals(peculiar)).collect(toList()).size();
         if (peculiares > 1) {repetidos+=peculiares-1;}
 
         return repetidos;
     }
 
+
     private int repetidosColorAula() {
 
-	    return cantidadConColorAula(ColorAula.Blanca) + cantidadConColorAula(ColorAula.Verde) + cantidadConColorAula(ColorAula.Azul) + cantidadConColorAula(ColorAula.Amarilla) + cantidadConColorAula(ColorAula.Roja);
+	    return cantidadConColorAula(ColorAula.Blanca) 
+	    		+ cantidadConColorAula(ColorAula.Verde)
+	    		+ cantidadConColorAula(ColorAula.Azul)
+	    		+ cantidadConColorAula(ColorAula.Amarilla)
+	    		+ cantidadConColorAula(ColorAula.Roja);
     }
 
     private int cantidadConColorAula(ColorAula color) {
@@ -475,7 +513,11 @@ public class Cromosoma extends Individuo {
 
     private int repetidosUbicacionAula() {
 
-	    return cantidadConUbicacionAula(UbicacionAula.Primera) + cantidadConUbicacionAula(UbicacionAula.Segunda) + cantidadConUbicacionAula(UbicacionAula.Tercera) + cantidadConUbicacionAula(UbicacionAula.Cuarta) + cantidadConUbicacionAula(UbicacionAula.Quinta);
+	    return cantidadConUbicacionAula(UbicacionAula.Primera)
+	    		+ cantidadConUbicacionAula(UbicacionAula.Segunda)
+	    		+ cantidadConUbicacionAula(UbicacionAula.Tercera)
+	    		+ cantidadConUbicacionAula(UbicacionAula.Cuarta)
+	    		+ cantidadConUbicacionAula(UbicacionAula.Quinta);
     }
 
     private int cantidadConUbicacionAula(UbicacionAula ubicacion) {
@@ -489,7 +531,11 @@ public class Cromosoma extends Individuo {
 
     private int repetidosPasatiempos() {
 
-	    return cantidadConPasatiempos(Pasatiempo.Epigrama) + cantidadConPasatiempos(Pasatiempo.Crucigrama) + cantidadConPasatiempos(Pasatiempo.Trivias) + cantidadConPasatiempos(Pasatiempo.Literati) + cantidadConPasatiempos(Pasatiempo.Palindromos);
+	    return cantidadConPasatiempos(Pasatiempo.Epigrama)
+	    		+ cantidadConPasatiempos(Pasatiempo.Crucigrama)
+	    		+ cantidadConPasatiempos(Pasatiempo.Trivias)
+	    		+ cantidadConPasatiempos(Pasatiempo.Literati)
+	    		+ cantidadConPasatiempos(Pasatiempo.Palindromos);
     }
 
     private int cantidadConPasatiempos(Pasatiempo pasatiempo) {
@@ -503,7 +549,11 @@ public class Cromosoma extends Individuo {
 
     private int repetidosBebidas() {
 
-        return cantidadConBebida(Bebida.Agua) + cantidadConBebida(Bebida.Cafe) + cantidadConBebida(Bebida.Te) + cantidadConBebida(Bebida.Leche) + cantidadConBebida(Bebida.Jugo);
+        return cantidadConBebida(Bebida.Agua) 
+        		+ cantidadConBebida(Bebida.Cafe)
+        		+ cantidadConBebida(Bebida.Te)
+        		+ cantidadConBebida(Bebida.Leche)
+        		+ cantidadConBebida(Bebida.Jugo);
     }
 
     private int cantidadConBebida(Bebida bebida) {
