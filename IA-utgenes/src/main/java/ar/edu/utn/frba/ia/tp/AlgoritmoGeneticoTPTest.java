@@ -90,7 +90,7 @@ public class AlgoritmoGeneticoTPTest {
 	@Test
 	public void config10() {
 		Configuracion config = new ConfiguracionTP();
-		config.setCriterioDeParo(new AptitudMinima(55));		// 20 + POSITIVOS * 15
+		config.setCriterioDeParo(new AptitudMinima(35));		// 20 + POSITIVOS * 15
 		config.setPoblacionInicial(4);
 		config.setMetodoDeSeleccion(new Torneo());
 		config.setCruzamiento(new Simple());

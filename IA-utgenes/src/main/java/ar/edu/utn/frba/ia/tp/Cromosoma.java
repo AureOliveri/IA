@@ -6,13 +6,9 @@ import java.util.Stack;
 import java.util.logging.Logger;
 
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
-import main.java.ar.edu.utn.frba.ia.ag.UTgeNesUtils;
 
 import static java.util.stream.Collectors.toList;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class Cromosoma extends Individuo {
 	
@@ -108,6 +104,7 @@ public class Cromosoma extends Individuo {
 
     @Override
     public double aptitud() {
+    	int VALOR_PENALIZACION_REPETIDOS = 1;
 
         profesores = new ArrayList<>();
         profesores.add(getRedaccion());
@@ -116,12 +113,13 @@ public class Cromosoma extends Individuo {
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
 
-        double aptitudFinal=20-penalizacionPorRepetidos() 
+        double aptitudFinal= 20 - penalizacionPorRepetidos()*VALOR_PENALIZACION_REPETIDOS
         		+ this.aptitudGeneral(this.literatura)
         		+ this.aptitudGeneral(this.ortografia)
         		+ this.aptitudGeneral(this.redaccion)
         		+ this.aptitudGeneral(this.etimologia)
         		+ this.aptitudGeneral(this.gramatica);
+        
         return aptitudFinal;
     }
         
@@ -214,21 +212,19 @@ public class Cromosoma extends Individuo {
 		System.out.println("====================================");
 	}
 
-	private int penalizacionPorRepetidos() {
-    	int VALOR_PENALIZACION = 1;
-    	
+	private int penalizacionPorRepetidos() {    	
 	    int cantidad_repetidas = (repetidosPeculiaridades() 
 	    							+ repetidosColorAula() 
 	    							+ repetidosUbicacionAula() 
 	    							+ repetidosPasatiempos() 
 	    							+ repetidosBebidas());
-	   int value=cantidad_repetidas*VALOR_PENALIZACION; 
+	   int value=cantidad_repetidas; 
 	    return value;
     }
 	
 	public double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad) {
-		final int POSITIVO=2;
-		final int NEGATIVO=-1;
+		final int POSITIVO=1;
+		final int NEGATIVO=0;
 		
         double value = 0;
 
@@ -429,23 +425,30 @@ public class Cromosoma extends Individuo {
 	    this.profesores = profesores;
     }
 
-
 	@Override
-	public Individuo generarRandom() {
-		Individuo nuevoInd;
+	public void mutar() { 
+		ProfesorEspecialidad especialidad = null;
+		int profesor = (int) (Math.random()*10/Clase.values().length);
+		int atrib = (int) (Math.random()*10/Clase.values().length);
+		int valorNuevo = (int) (Math.random()*10/Clase.values().length);
 		
-		try {
-			nuevoInd = new Cromosoma();
-			return nuevoInd;
-		} catch (Exception e) {
-			Logger.getLogger(
-				Logger.GLOBAL_LOGGER_NAME).severe(
-					"No se puede crear una instancia de "
-					+ this.getClass().getName()
-					+ ". Probablemente no tenga un constructor vacio."
-					+ " // CAUSA: " + e);
+		switch(profesor) {
+			case 0: especialidad = this.getLiteratura();break;
+			case 1: especialidad = this.getGramatica();break;
+			case 2: especialidad = this.getEtimologia();break;
+			case 3: especialidad = this.getOrtografia();break;
+			case 4: especialidad = this.getRedaccion();break;
+			}
+		
+		switch(atrib){
+		case 0: especialidad.setBebida(Bebida.values()[valorNuevo]);break;
+		case 1: especialidad.setColorAula(ColorAula.values()[valorNuevo]);break;
+		case 2: especialidad.setPasatiempo(Pasatiempo.values()[valorNuevo]);break;
+		case 3: especialidad.setPeculiaridad(Peculiaridad.values()[valorNuevo]);break;
+		case 4: especialidad.setUbicacionAula(UbicacionAula.values()[valorNuevo]);break;
+			
 		}
-		return this.clone();
+		
 	}
 	
 	@Override
