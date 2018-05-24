@@ -53,16 +53,21 @@ public class AlgoritmoGenetico {
 		for (Individuo individuo : this.individuos) {
 			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, individuo.toString());
 		}
-		
+		int i = 0;
 		while (!this.configuracion.getCriterioDeParo().parar(this.individuos)) {
+
+			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "i'm running on "+ String.valueOf(i));
 			
 			this.estado.generarEstadisticas(individuos);
+
+			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "Mejor individuo "+ this.estado.getMejoresIndividuos().get(i).toString());
 			
 			this.seleccion();
 			
 			this.cruzamiento();
 			
 			this.mutacion();
+			i++;
 		}
 		
 		Collections.sort(this.individuos);
@@ -90,7 +95,6 @@ public class AlgoritmoGenetico {
 			
 			Individuo individuo = this.estado.getMejoresIndividuos().get(i);
 			Double aptitudPromedio = this.estado.getAptitudesPromedio().get(i);
-			
 			Logger.getLogger(
 					Logger.GLOBAL_LOGGER_NAME).log(
 							Level.SEVERE,
@@ -98,7 +102,6 @@ public class AlgoritmoGenetico {
 									+ aptitudPromedio
 									+ " // Mejor Individuo "
 									+ individuo.toString());
-			
 			System.out.println(this.estado.getMejoresIndividuos().get(i).aptitud() + "	"
 					+ this.estado.getAptitudesPromedio().get(i) + "	"
 					+ this.estado.getPeoresIndividuos().get(i).aptitud());

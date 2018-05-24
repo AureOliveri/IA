@@ -16,7 +16,7 @@ public class AptitudMinima extends CriterioDeParo {
 	public Boolean parar(List<Individuo> individuos) {
 		
 		for (Individuo individuo : individuos) {
-			if (individuo.aptitud() > aptitudMinima) {
+			if (individuo.aptitud() >= aptitudMinima) {
 				return Boolean.TRUE;
 			}
 		}
