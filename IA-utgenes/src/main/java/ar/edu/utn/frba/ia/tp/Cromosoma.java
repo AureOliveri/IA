@@ -60,46 +60,6 @@ public class Cromosoma extends Individuo {
 	}
 	
 
-	@Override
-	public void mutar() {
-		
-		Individuo individuoRandom = this.generarRandom(); // genero uno nuevo individuo random sólo para robarle el atributo que necesito "mutado"
-		boolean stop = false;
-		
-		Field atributoAleatorio = (Field)UTgeNesUtils.alguno(this.getClass().getDeclaredFields());
-		Method getter = UTgeNesUtils.armarGetter(this, atributoAleatorio);
-		stop = false;
-		while(stop) {
-			try {
-				if(getter.invoke(individuoRandom).getClass() == profesores.getClass()) {
-					atributoAleatorio = (Field)UTgeNesUtils.alguno(this.getClass().getDeclaredFields());
-					getter = UTgeNesUtils.armarGetter(this, atributoAleatorio);
-				} else {
-					stop = true;
-				}
-			} catch (Exception e) { }
-		}
-		
-//		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Mutando atributo: " + atributoAleatorio.getName());
-		Method setter = UTgeNesUtils.armarSetter(this, atributoAleatorio);
-		
-		try {
-			
-			setter.invoke(this, getter.invoke(individuoRandom)); // reemplazo el atributo de mi individuo por el atributo de mi individuo random
-		}
-		catch (Exception e) {
-			Logger.getLogger(
-				Logger.GLOBAL_LOGGER_NAME).severe(
-					"Fallo intentando acceder al atributo '"
-					+ atributoAleatorio
-					+ "' del Idividuo: "
-					+ this.toString()
-					+ "// CAUSA: " + e);
-		}
-		
-		return;
-	}
-
 	private void cargarPilaColorAula(Stack<ColorAula> pilaColoresAula){
 		while(ColorAula.values().length != pilaColoresAula.size()){
 			ColorAula element=ColorAula.values()[(int) (Math.random() * ColorAula.values().length)];
@@ -156,17 +116,16 @@ public class Cromosoma extends Individuo {
         profesores.add(getLiteratura());
         profesores.add(getOrtografia());
 
-        return penalizacionPorRepetidos() 
+        double aptitudFinal=20-penalizacionPorRepetidos() 
         		+ this.aptitudGeneral(this.literatura)
         		+ this.aptitudGeneral(this.ortografia)
         		+ this.aptitudGeneral(this.redaccion)
         		+ this.aptitudGeneral(this.etimologia)
         		+ this.aptitudGeneral(this.gramatica);
+        return aptitudFinal;
     }
-
-
-    public Cromosoma() {
-
+        
+   private void metodoIvan() {
 		Stack<ColorAula> pilaColoresAula= new Stack<Cromosoma.ColorAula>();
 		Stack<UbicacionAula> pilaUbicacionesAula=new Stack<Cromosoma.UbicacionAula>();
 		Stack<Peculiaridad> pilaPeculiaridades=new Stack<Cromosoma.Peculiaridad>();
@@ -184,33 +143,96 @@ public class Cromosoma extends Individuo {
 		this.setEtimologia(new ProfesorEspecialidad(Clase.Etimologia, pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
 		this.setOrtografia(new ProfesorEspecialidad(Clase.Ortografia, pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
 		this.setRedaccion(new ProfesorEspecialidad(Clase.Redaccion, pilaColoresAula.pop(),pilaUbicacionesAula.pop(),pilaPeculiaridades.pop(),pilaBebidas.pop(),pilaPasatiempos.pop()));
-        profesores = new ArrayList<>();
-		profesores.add(getRedaccion());
-		profesores.add(getEtimologia());
-        profesores.add(getGramatica());
-        profesores.add(getLiteratura());
-        profesores.add(getOrtografia());
+   }
+   
+   private void metodoJulian() {
+		Stack<Integer> pilaColoresAula= new Stack<Integer>();
+		Stack<Integer> pilaUbicacionesAula=new Stack<Integer>();
+		Stack<Integer> pilaPeculiaridades=new Stack<Integer>();
+		Stack<Integer> pilaBebidas=new Stack<Integer>();
+		Stack<Integer> pilaPasatiempos=new Stack<Integer>();
+
+		this.cargarPila(pilaColoresAula);
+		this.cargarPila(pilaUbicacionesAula);
+		this.cargarPila(pilaPeculiaridades);
+		this.cargarPila(pilaBebidas);
+		this.cargarPila(pilaPasatiempos);
+		
+		this.setGramatica(new ProfesorEspecialidad(Clase.Gramatica, ColorAula.values()[pilaColoresAula.pop()],UbicacionAula.values()[pilaUbicacionesAula.pop()],Peculiaridad.values()[pilaPeculiaridades.pop()],Bebida.values()[pilaBebidas.pop()],Pasatiempo.values()[pilaPasatiempos.pop()]));
+		this.setLiteratura(new ProfesorEspecialidad(Clase.Literatura, ColorAula.values()[pilaColoresAula.pop()],UbicacionAula.values()[pilaUbicacionesAula.pop()],Peculiaridad.values()[pilaPeculiaridades.pop()],Bebida.values()[pilaBebidas.pop()],Pasatiempo.values()[pilaPasatiempos.pop()]));
+		this.setEtimologia(new ProfesorEspecialidad(Clase.Etimologia, ColorAula.values()[pilaColoresAula.pop()],UbicacionAula.values()[pilaUbicacionesAula.pop()],Peculiaridad.values()[pilaPeculiaridades.pop()],Bebida.values()[pilaBebidas.pop()],Pasatiempo.values()[pilaPasatiempos.pop()]));
+		this.setOrtografia(new ProfesorEspecialidad(Clase.Ortografia, ColorAula.values()[pilaColoresAula.pop()],UbicacionAula.values()[pilaUbicacionesAula.pop()],Peculiaridad.values()[pilaPeculiaridades.pop()],Bebida.values()[pilaBebidas.pop()],Pasatiempo.values()[pilaPasatiempos.pop()]));
+		this.setRedaccion(new ProfesorEspecialidad(Clase.Redaccion, ColorAula.values()[pilaColoresAula.pop()],UbicacionAula.values()[pilaUbicacionesAula.pop()],Peculiaridad.values()[pilaPeculiaridades.pop()],Bebida.values()[pilaBebidas.pop()],Pasatiempo.values()[pilaPasatiempos.pop()]));
+  }
+   private void cargarPila(Stack<Integer> pila) {
+   	while(pila.size()!=Clase.values().length) {
+   		int valor=(int)(Math.random()*10)%(Clase.values().length);
+   		if(!pila.contains(valor)) pila.push(valor);
+   	}
+   	
+   }
+    
+    public Cromosoma() {
+
+//    	metodoIvan();
+		metodoJulian();
+//    	this.cargarCromos();
+    	profesores = new ArrayList<>();
+			profesores.add(getRedaccion());
+			profesores.add(getEtimologia());
+	        profesores.add(getGramatica());
+	        profesores.add(getLiteratura());
+	        profesores.add(getOrtografia());
 
       //  this.printCromosoma();
 	}
+    
+//    private void cargarCromos() {							//Cargaba el cromo con valores Random así era menos procesamiento para los Stacks (total la funcion de aptitu los va a descartar)... Pero hace muy largas las corridas, muchos valores repetidos.
+//  		this.setGramatica(cargarCromoRandom(Clase.Gramatica));
+//  		this.setLiteratura(cargarCromoRandom(Clase.Literatura));
+//  		this.setEtimologia(cargarCromoRandom(Clase.Etimologia));
+//  		this.setOrtografia(cargarCromoRandom(Clase.Ortografia));
+//  		this.setRedaccion(cargarCromoRandom(Clase.Redaccion));
+//      }
+//
+//      private ProfesorEspecialidad cargarCromoRandom(Clase clase) {
+//      	return (new ProfesorEspecialidad(clase,
+//      						ColorAula.values()[(int)(Math.random()*10)%(ColorAula.values().length)],
+//      						UbicacionAula.values()[(int)(Math.random()*10)%(UbicacionAula.values().length)],
+//      						Peculiaridad.values()[(int)(Math.random()*10)%(Peculiaridad.values().length)],
+//      						Bebida.values()[(int)(Math.random()*10)%(Bebida.values().length)],
+//      						Pasatiempo.values()[(int)(Math.random()*10)%(Pasatiempo.values().length)]));
+//      }
 	
 	public void printCromosoma(){
 		System.out.println("Gramatica: "+this.gramatica.printProfesorEspecialidad());
 		System.out.println("Literatura: "+this.literatura.printProfesorEspecialidad());
-		System.out.println("Etimolog�a: "+this.etimologia.printProfesorEspecialidad());
-		System.out.println("Ortograf�a: "+this.ortografia.printProfesorEspecialidad());
-		System.out.println("Redacci�n: "+this.redaccion.printProfesorEspecialidad());
+		System.out.println("Etimología: "+this.etimologia.printProfesorEspecialidad());
+		System.out.println("Ortografía: "+this.ortografia.printProfesorEspecialidad());
+		System.out.println("Redacción: "+this.redaccion.printProfesorEspecialidad());
 	    System.out.println(this.aptitud());
 		System.out.println("====================================");
 	}
 
+	private int penalizacionPorRepetidos() {
+    	int VALOR_PENALIZACION = 1;
+    	
+	    int cantidad_repetidas = (repetidosPeculiaridades() 
+	    							+ repetidosColorAula() 
+	    							+ repetidosUbicacionAula() 
+	    							+ repetidosPasatiempos() 
+	    							+ repetidosBebidas());
+	   int value=cantidad_repetidas*VALOR_PENALIZACION; 
+	    return value;
+    }
+	
 	public double aptitudGeneral(ProfesorEspecialidad profesorEspecialidad) {
-		final int POSITIVO=100;
-		final int NEGATIVO=-3;
+		final int POSITIVO=2;
+		final int NEGATIVO=-1;
 		
         double value = 0;
 
-        //El profesor que fuma pipa imparte c�tedra en el aula roja.
+        //1) El profesor que fuma pipa imparte c�tedra en el aula roja.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Pipa)) {
             if (profesorEspecialidad.getColorAula().equals(ColorAula.Roja)) {
                 value+=POSITIVO;
@@ -220,7 +242,7 @@ public class Cromosoma extends Individuo {
             }
         }
 
-        // El profesor que usa gafas imparte el curso de literatura.
+        //2) El profesor que usa gafas imparte el curso de literatura.
         if (profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Gafas)) {
             if (profesorEspecialidad.getClase().equals(Clase.Literatura)) {
                 value+=POSITIVO;
@@ -231,7 +253,7 @@ public class Cromosoma extends Individuo {
             }
         }
 
-		//El profesor que es calvo toma t�
+		//3) El profesor que es calvo toma t�
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Calvo)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Te)){
 				value+=POSITIVO;
@@ -240,7 +262,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 
-        //El aula verde esta a la izquierda del aula blanca
+        //4) El aula verde esta a la izquierda del aula blanca
         if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)) {
             List<ProfesorEspecialidad> profe = profesores.stream()
             									.filter(prof -> 
@@ -255,7 +277,7 @@ public class Cromosoma extends Individuo {
             }
         }
 
-		//El profesor del aula verde toma caf�
+		//5) El profesor del aula verde toma caf�
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Verde)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Cafe)){
 				value+=POSITIVO;
@@ -264,7 +286,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 
-        // El profesor aficionado a los crucigramas imparte el curso de ortograf�a.
+        //6) El profesor aficionado a los crucigramas imparte el curso de ortograf�a.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Crucigrama)) {
             if (profesorEspecialidad.getClase().equals(Clase.Ortografia)) {
                 value+=POSITIVO;
@@ -273,7 +295,7 @@ public class Cromosoma extends Individuo {
             }
         }
 		
-		//El profesor del aula amarilla es aficionado a los pal�ndromos.
+		//7) El profesor del aula amarilla es aficionado a los pal�ndromos.
 		if(profesorEspecialidad.getColorAula().equals(ColorAula.Amarilla)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)){
 				value+=POSITIVO;
@@ -282,7 +304,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		// El que imparte clases en el aula del centro toma leche
+		//8) El que imparte clases en el aula del centro toma leche
 		if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Tercera)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Leche)){
 				value+=POSITIVO;
@@ -291,7 +313,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//El decano de la universidad imparte su catedra en la primera aula.
+		//9) El decano de la universidad imparte su catedra en la primera aula.
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)){
 			if(profesorEspecialidad.getUbicacionAula().equals(UbicacionAula.Primera)){
 				value+=POSITIVO;
@@ -300,7 +322,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//El profesor aficionado a los epigramas imparte su curso junto al profesor de redacci�n.
+		//10) El profesor aficionado a los epigramas imparte su curso junto al profesor de redacci�n.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
 		    if (esVecinoDe(profesorEspecialidad, getRedaccion())) {
 		        value+=POSITIVO;
@@ -310,7 +332,7 @@ public class Cromosoma extends Individuo {
 		}
 
 
-		//El profesor de etimolog�as dicta su clase junto al aula del aficionado a los pal�ndromos.
+		//11) El profesor de etimolog�as dicta su clase junto al aula del aficionado a los pal�ndromos.
         if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Palindromos)) {
             if(esVecinoDe(profesorEspecialidad, getEtimologia())) {
 		        value+=POSITIVO;
@@ -319,7 +341,7 @@ public class Cromosoma extends Individuo {
             }
         }
 
-        // El profesor cuyo pasatiempo son las trivias bebe jugo.
+        //12) El profesor cuyo pasatiempo son las trivias bebe jugo.
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Trivias)){
 			if(profesorEspecialidad.getBebida().equals(Bebida.Jugo)){
 				value+=POSITIVO;
@@ -328,7 +350,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		// El profesor que es barbon es aficionado al literati (scrabble).
+		//13) El profesor que es barbon es aficionado al literati (scrabble).
 		if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Barbon)){
 			if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Literati)){
 				value+=POSITIVO;
@@ -337,7 +359,7 @@ public class Cromosoma extends Individuo {
 			}
 		}
 		
-		//El decano imparte su catedra junto al aula azul.
+		//14) El decano imparte su catedra junto al aula azul.
         if(profesorEspecialidad.getPeculiaridad().equals(Peculiaridad.Decano)) {
             List<ProfesorEspecialidad> profes = profesores.stream()
             									.filter(prof -> prof.getColorAula().equals(ColorAula.Azul) 
@@ -350,7 +372,7 @@ public class Cromosoma extends Individuo {
             }
         }
 		
-		//El que es aficionado a los epigramas es vecino de aula del que toma agua
+		//15) El que es aficionado a los epigramas es vecino de aula del que toma agua
 		if(profesorEspecialidad.getPasatiempo().equals(Pasatiempo.Epigrama)) {
             List<ProfesorEspecialidad> profes = profesores.stream()
             									.filter(prof -> prof.getBebida().equals(Bebida.Agua) 
@@ -458,19 +480,6 @@ public class Cromosoma extends Individuo {
         }
 
 
-    }
-
-    private double penalizacionPorRepetidos() {
-    	int VALOR_PENALIZACION = -2;
-    	
-	    double value = 0;
-	    value = (repetidosPeculiaridades() 
-	    		+ repetidosColorAula() 
-	    		+ repetidosUbicacionAula() 
-	    		+ repetidosPasatiempos() 
-	    		+ repetidosBebidas())*VALOR_PENALIZACION;
-
-	    return value;
     }
 
     private int repetidosPeculiaridades() {
