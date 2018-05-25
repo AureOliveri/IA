@@ -95,7 +95,7 @@ public class AlgoritmoGeneticoTPTest {
 	
 	private void correrTest(Configuracion config, int numero_config) {
 		System.out.println("======CONFIG "+numero_config+"======");
-			AlgoritmoGenetico ag = new AlgoritmoGeneticoTP(config, Cromosoma.class);
+			AlgoritmoGenetico ag = new AlgoritmoGeneticoTP(config, Cromosoma.class,numero_config);
 			Individuo resultado = ag.ejecutar();
 			Assert.assertNotNull(resultado);
 			((Cromosoma) resultado).printCromosoma();

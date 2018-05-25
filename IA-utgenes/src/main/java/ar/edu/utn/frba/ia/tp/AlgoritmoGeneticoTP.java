@@ -13,11 +13,11 @@ import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 public class AlgoritmoGeneticoTP extends AlgoritmoGenetico {
 
 	private Boolean log;
-	public AlgoritmoGeneticoTP(Configuracion configuracion, Class<? extends Individuo> individuoClass) {
+	public AlgoritmoGeneticoTP(Configuracion configuracion, Class<? extends Individuo> individuoClass,int numero_config) {
 		super(configuracion,individuoClass);
 		if (log==Boolean.TRUE) System.setProperty("java.util.logging.SimpleFormatter.format","%5$s %n");
 		try {
-			Handler fileHandler = new FileHandler("./DATOS.log", false);
+			Handler fileHandler = new FileHandler("./Resultados"+numero_config+".log", false);
 			SimpleFormatter simpleFormatter = new SimpleFormatter();
 			fileHandler.setFormatter(simpleFormatter);
 			Logger.getLogger(

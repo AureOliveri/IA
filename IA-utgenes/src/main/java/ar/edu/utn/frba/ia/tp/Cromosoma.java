@@ -467,7 +467,15 @@ public class Cromosoma extends Individuo {
 	//**************************************************************************************//
     //------------------------------------GETTERS/SETTERS-----------------------------------//
     //**************************************************************************************//
-	
+	public String stringCromosoma() {
+		String cromo=this.gramatica.printProfesorEspecialidad();
+			cromo+=(this.literatura.printProfesorEspecialidad());
+			cromo+=(this.etimologia.printProfesorEspecialidad());
+			cromo+=(this.ortografia.printProfesorEspecialidad());
+			cromo+=(this.redaccion.printProfesorEspecialidad());
+		return cromo;
+	}
+    
     public void printCromosoma(){
     	System.out.println(this.gramatica.printProfesorEspecialidad());
 		System.out.println(this.literatura.printProfesorEspecialidad());

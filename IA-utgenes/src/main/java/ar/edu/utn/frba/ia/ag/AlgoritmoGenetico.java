@@ -75,7 +75,6 @@ public class AlgoritmoGenetico {
 		}
 		
 		Collections.sort(this.individuos);
-		individuos.forEach( a -> ((Cromosoma) a).printCromosoma());
 		
 		this.loggearEstado();
 		
@@ -117,5 +116,17 @@ public class AlgoritmoGenetico {
 		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Cantidad de Veces que muto: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
 		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Individuo Campeon: " + this.estado.getMejorIndividuo());
 		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Peor Individuo: " + this.estado.getPeorIndividuo());
+	}
+	
+	public String masApto() {
+		return this.individuos.get(0).toString();
+	}
+	
+	public String campeon() {
+		return this.estado.getMejorIndividuo().toString();
+	}
+	
+	public String peor(){
+		return this.estado.getPeorIndividuo().toString();
 	}
 }

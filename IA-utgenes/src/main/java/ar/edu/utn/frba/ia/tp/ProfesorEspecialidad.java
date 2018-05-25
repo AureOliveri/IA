@@ -29,19 +29,18 @@ public class ProfesorEspecialidad {
 
 	public String printProfesorEspecialidad(){
 		StringBuffer buffer=new StringBuffer();
-		buffer.append("{");
-		buffer.append("Clase:"+this.clase.toString().toUpperCase());
-		buffer.append(" | ");
-		buffer.append("Peculiaridad:"+this.peculiaridad.toString().toUpperCase());
-		buffer.append(" | ");
-		buffer.append("Bebida:"+this.bebida.toString().toUpperCase());
-		buffer.append(" | ");		
-		buffer.append("Pasatiempo:"+this.pasatiempo.toString().toUpperCase());
-		buffer.append(" | ");
-		buffer.append("Ubicacion:"+this.ubicacionAula.toString().toUpperCase());
-		buffer.append(" | ");		
-		buffer.append("Color:"+this.colorAula.toString().toUpperCase());
-		buffer.append(" | ");
+			buffer.append("Clase:"+this.clase.toString().toUpperCase());
+			buffer.append(" | ");
+			buffer.append("Peculiaridad:"+this.peculiaridad.toString().toUpperCase());
+			buffer.append(" | ");
+			buffer.append("Bebida:"+this.bebida.toString().toUpperCase());
+			buffer.append(" | ");		
+			buffer.append("Pasatiempo:"+this.pasatiempo.toString().toUpperCase());
+			buffer.append(" | ");
+			buffer.append("Ubicacion:"+this.ubicacionAula.toString().toUpperCase());
+			buffer.append(" | ");		
+			buffer.append("Color:"+this.colorAula.toString().toUpperCase());
+			buffer.append("\n");
 		return buffer.toString();
 	}
 
