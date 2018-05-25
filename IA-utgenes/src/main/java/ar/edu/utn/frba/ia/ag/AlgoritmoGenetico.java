@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import main.java.ar.edu.utn.frba.ia.tp.Cromosoma;
+
 public class AlgoritmoGenetico {
 	
 	protected Configuracion configuracion;
@@ -45,32 +47,35 @@ public class AlgoritmoGenetico {
 	}
 	
 	public Individuo ejecutar() {
-		
+
 		this.generarPoblacionInicial(individuoClass);
 		
 		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "Población inicial");
 		
 		for (Individuo individuo : this.individuos) {
-			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, individuo.toString());
+//			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, individuo.toString());
+			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, Double.toString(individuo.aptitud()));
 		}
 		int i = 0;
 		while (!this.configuracion.getCriterioDeParo().parar(this.individuos)) {
 
-			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "i'm running on "+ String.valueOf(i));
+//			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "i'm running on "+ String.valueOf(i));
 			
 			this.estado.generarEstadisticas(individuos);
 
-			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.FINE, "Mejor individuo "+ this.estado.getMejoresIndividuos().get(i).toString());
+			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.INFO, "Mejor individuo "+ this.estado.getMejoresIndividuos().get(i).toString());
 			
 			this.seleccion();
 			
 			this.cruzamiento();
 			
 			this.mutacion();
+			
 			i++;
 		}
 		
 		Collections.sort(this.individuos);
+		individuos.forEach( a -> ((Cromosoma) a).printCromosoma());
 		
 		this.loggearEstado();
 		
