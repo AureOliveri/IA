@@ -14,13 +14,13 @@ public abstract class Mutacion {
 			
 			Individuo individuoAleatorio = individuos.get((int)(Math.random() * individuos.size()));
 			
-			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("MUTA -> individuo previo: " + individuoAleatorio.toString());
+	//		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("MUTA -> individuo previo: " + individuoAleatorio.toString());
 
 			individuoAleatorio.mutar();
 			
 			estado.sumarMutacion();
 			
-			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("MUTA -> nuevo individuo: " + individuoAleatorio.toString());
+//			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("MUTA -> nuevo individuo: " + individuoAleatorio.toString());
 			
 		}
 	}
