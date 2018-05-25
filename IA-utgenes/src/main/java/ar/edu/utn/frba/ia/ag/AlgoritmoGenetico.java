@@ -111,11 +111,11 @@ public class AlgoritmoGenetico {
 					+ this.estado.getPeoresIndividuos().get(i).aptitud());
 		}
 		
-		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Individuo mas Apto: " + this.individuos.get(0).toString());
+		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Individuo mas Apto: " + this.individuos.get(0).toString());
 		
-		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Cantidad de Veces que muto: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
-		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Individuo Campeon: " + this.estado.getMejorIndividuo());
-		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).severe("Peor Individuo: " + this.estado.getPeorIndividuo());
+		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Cantidad de Veces que muto: " + this.estado.getCantMutaciones() + " / " + this.estado.getCorridas());
+		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Individuo Campeon: " + this.estado.getMejorIndividuo());
+		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).info("Peor Individuo: " + this.estado.getPeorIndividuo());
 	}
 	
 	public String masApto() {

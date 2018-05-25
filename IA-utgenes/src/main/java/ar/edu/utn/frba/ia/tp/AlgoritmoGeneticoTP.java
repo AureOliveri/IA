@@ -13,6 +13,7 @@ import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 public class AlgoritmoGeneticoTP extends AlgoritmoGenetico {
 
 	private Boolean log;
+	
 	public AlgoritmoGeneticoTP(Configuracion configuracion, Class<? extends Individuo> individuoClass,int numero_config) {
 		super(configuracion,individuoClass);
 		if (log==Boolean.TRUE) System.setProperty("java.util.logging.SimpleFormatter.format","%5$s %n");

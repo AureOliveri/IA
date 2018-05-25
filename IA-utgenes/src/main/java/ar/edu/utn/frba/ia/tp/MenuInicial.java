@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
 
 public class MenuInicial {
 
@@ -34,6 +35,7 @@ public class MenuInicial {
 	private JTable tabResultados;
 	private JTextArea txtResultados;
 	private DefaultTableModel model;
+	private JLabel lblInfoLogs;
 	/**
 	 * Launch the application.
 	 */
@@ -150,8 +152,14 @@ public class MenuInicial {
 		));
 		
 		txtResultados = new JTextArea();
-		txtResultados.setBounds(32, 189, 375, 57);
+		txtResultados.setEditable(false);
+		txtResultados.setBounds(32, 189, 298, 57);
 		frmAcertijoProfesores.getContentPane().add(txtResultados);
+		
+		lblInfoLogs = new JLabel("(Revisar log para mayor información)");
+		lblInfoLogs.setVisible(false);
+		lblInfoLogs.setBounds(340, 206, 221, 27);
+		frmAcertijoProfesores.getContentPane().add(lblInfoLogs);
 		tabResultados.getColumnModel().getColumn(2).setPreferredWidth(95);
 		
 		
@@ -167,7 +175,6 @@ public class MenuInicial {
 		Object[] row3 = obtenerDatos(((Cromosoma)resultado).getLiteratura());
 		Object[] row4 = obtenerDatos(((Cromosoma)resultado).getOrtografia());
 		Object[] row5 = obtenerDatos(((Cromosoma)resultado).getRedaccion());
-		
  
 		
 		model = (DefaultTableModel) tabResultados.getModel();
@@ -180,6 +187,7 @@ public class MenuInicial {
 		txtResultados.append("- Individuo mas apto: "+ag.masApto());
 		txtResultados.append("\n- Aptitud Campeon: "+ag.campeon());
 		txtResultados.append("\n- Peor aptitud: "+ag.peor());
+		lblInfoLogs.setVisible(true);
 		}
 
 	private Object[] obtenerDatos(ProfesorEspecialidad profesor) {

@@ -81,21 +81,37 @@ public class AlgoritmoGeneticoTPTest {
 		correrTest(config,4);
 	}
 	
-	//@Test
-	public void config5() {				// TEST SOLUCION PERFECTA
+	
+	
+	
+	@Test
+	public void testAptitudPerfecta() {				// TEST SOLUCION PERFECTA
 		Configuracion config = new ConfiguracionTP();
-		config.setCriterioDeParo(new AptitudMinima(15));
-		config.setPoblacionInicial(10000);
+		config.setCriterioDeParo(new AptitudMinima(35));
+		config.setPoblacionInicial(1000);
 		config.setMetodoDeSeleccion(new Torneo());
 		config.setCruzamiento(new Simple());
 		config.setMutacion(new MutacionSimple(0.5));
-		correrTest(config,5);
+		correrTest(config,6);
+	}
+	
+	@Test
+	public void config6() {				
+		Configuracion config = new ConfiguracionTP();
+		config.setCriterioDeParo(new TiempoTranscurrido(0,5,0));
+		config.setPoblacionInicial(100000);
+		config.setMetodoDeSeleccion(new Torneo());
+		config.setCruzamiento(new Simple());
+		config.setMutacion(new MutacionSimple(0.5));
+		correrTest(config,6);
 	}
 		
 	
 	private void correrTest(Configuracion config, int numero_config) {
 		System.out.println("======CONFIG "+numero_config+"======");
 			AlgoritmoGenetico ag = new AlgoritmoGeneticoTP(config, Cromosoma.class,numero_config);
+			((AlgoritmoGeneticoTP)ag).activarLogAptitud();
+
 			Individuo resultado = ag.ejecutar();
 			Assert.assertNotNull(resultado);
 			((Cromosoma) resultado).printCromosoma();
