@@ -83,7 +83,7 @@ public class MenuInicial {
 				correrTest(config,1);
 			}
 		});
-		btnPrueba1.setBounds(32, 24, 108, 35);
+		btnPrueba1.setBounds(27, 24, 86, 27);
 		frmAcertijoProfesores.getContentPane().add(btnPrueba1);
 		
 		// --------------------- PRUEBA 2
@@ -100,7 +100,7 @@ public class MenuInicial {
 				correrTest(config,2);
 			}
 		});
-		btnPrueba2.setBounds(172, 24, 108, 35);
+		btnPrueba2.setBounds(140, 24, 86, 27);
 		frmAcertijoProfesores.getContentPane().add(btnPrueba2);
 		
 		// --------------------- PRUEBA 3
@@ -117,7 +117,7 @@ public class MenuInicial {
 				correrTest(config,3);
 			}
 		});
-		btnPrueba3.setBounds(312, 24, 108, 35);
+		btnPrueba3.setBounds(253, 24, 86, 27);
 		frmAcertijoProfesores.getContentPane().add(btnPrueba3);
 		
 		// --------------------- PRUEBA 4
@@ -134,11 +134,30 @@ public class MenuInicial {
 				correrTest(config,4);
 			}
 		});
-		btnPrueba4.setBounds(452, 24, 108, 35);
+		btnPrueba4.setBounds(366, 24, 86, 27);
 		frmAcertijoProfesores.getContentPane().add(btnPrueba4);
 		
+		//---------------------- PRUEBA 5
+		JButton btnPrueba5 = new JButton("Prueba 5");
+		btnPrueba5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiarDatos();
+				Configuracion config = new ConfiguracionTP();
+				config.setCriterioDeParo(new TiempoTranscurrido(0,5,0));
+				config.setPoblacionInicial(100000);
+				config.setMetodoDeSeleccion(new Torneo());
+				config.setCruzamiento(new Simple());
+				config.setMutacion(new MutacionSimple(0.5));
+			correrTest(config,5);
+			}
+		});
+		btnPrueba5.setBounds(479, 24, 86, 27);
+		frmAcertijoProfesores.getContentPane().add(btnPrueba5);
+		
+		
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(32, 69, 528, 114);
+		scrollPane.setBounds(27, 69, 538, 114);
 		frmAcertijoProfesores.getContentPane().add(scrollPane);
 		
 		tabResultados = new JTable();
@@ -151,6 +170,8 @@ public class MenuInicial {
 			}
 		));
 		
+		tabResultados.getColumnModel().getColumn(2).setPreferredWidth(95);
+		
 		txtResultados = new JTextArea();
 		txtResultados.setEditable(false);
 		txtResultados.setBounds(32, 189, 298, 57);
@@ -160,8 +181,6 @@ public class MenuInicial {
 		lblInfoLogs.setVisible(false);
 		lblInfoLogs.setBounds(340, 206, 221, 27);
 		frmAcertijoProfesores.getContentPane().add(lblInfoLogs);
-		tabResultados.getColumnModel().getColumn(2).setPreferredWidth(95);
-		
 		
 	}
 	

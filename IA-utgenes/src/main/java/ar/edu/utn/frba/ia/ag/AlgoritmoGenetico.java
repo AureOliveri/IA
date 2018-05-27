@@ -63,7 +63,7 @@ public class AlgoritmoGenetico {
 			
 			this.estado.generarEstadisticas(individuos);
 
-			Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.INFO, "Mejor individuo "+ this.estado.getMejoresIndividuos().get(i).toString());
+	//		Logger.getLogger(Logger.GLOBAL_LOGGER_NAME).log(Level.INFO, "Mejor individuo "+ this.estado.getMejoresIndividuos().get(i).toString());
 			
 			this.seleccion();
 			

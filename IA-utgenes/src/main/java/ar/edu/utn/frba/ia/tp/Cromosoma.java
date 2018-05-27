@@ -62,7 +62,7 @@ public class Cromosoma extends Individuo {
     public Cromosoma() {
 
     	cargarCromosomaSinRepetidos();				// Carga ints en las pilas, NO acepta repetidos
-//    	cargarCromosomaConRepetidos();			// No usa pilas, asigna valores random directamente, PUEDEN haber repetidos
+ //   	cargarCromosomaConRepetidos();			// No usa pilas, asigna valores random directamente, PUEDEN haber repetidos
 		
         profesores = new ArrayList<>();
         profesores.add(getRedaccion());
@@ -80,12 +80,13 @@ public class Cromosoma extends Individuo {
     public double aptitud() {
     	int VALOR_PENALIZACION_REPETIDOS = 3;
 
-        double aptitudFinal= this.aptitudGeneral(this.literatura)
+        double aptitudFinal= 20 - cantidadRepetidos()*VALOR_PENALIZACION_REPETIDOS
+        		+ this.aptitudGeneral(this.literatura)
         		+ this.aptitudGeneral(this.ortografia)
         		+ this.aptitudGeneral(this.redaccion)
         		+ this.aptitudGeneral(this.etimologia)
-        		+ this.aptitudGeneral(this.gramatica)
-        		- cantidadRepetidos()*VALOR_PENALIZACION_REPETIDOS;
+        		+ this.aptitudGeneral(this.gramatica);
+        		
         
         return aptitudFinal;
     }  
@@ -321,9 +322,9 @@ public class Cromosoma extends Individuo {
 		}
 		
 		int atributo = (int) (Math.random()*10/Clase.values().length);
-//		mutarTodosAtributos(especialidad);									// Muta TODOS los atributos de alguna especialidad
-		mutarUnAtributo(especialidad, atributo);							// Muta un solo atributo de alguna especialidad
-//		mutarTodosGenesPrincipales();										// Muta un solo atributo de cada especialidad
+		mutarUnAtributo(especialidad, atributo);							// Muta un solo atributo de algun profesor
+//		mutarTodosAtributos(especialidad);									// Muta TODOS los atributos de algun profesor
+//		mutarTodosGenesPrincipales();										// Muta un solo atributo de cada profesor
 	}
 	
 	
